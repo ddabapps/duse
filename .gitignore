@@ -1,0 +1,15 @@
+# .gitignore file for Keynote project
+
+
+# Delphi generated temporary files and directories
+
+__recovery
+__history
+*.local
+*.identcache
+*.res
+
+
+# Project specific directories & files
+
+_build
