@@ -8,6 +8,8 @@ __history
 *.local
 *.identcache
 *.res
+*.dsk
+*.~*
 
 
 # Project specific directories & files
