@@ -1,0 +1,228 @@
+object MainForm: TMainForm
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'Unit2NS - Map Delphi Units To Namespaces'
+  ClientHeight = 629
+  ClientWidth = 529
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object cbMappings: TComboBox
+    Position.X = 96.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 409.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    OnChange = cbMappingsChange
+  end
+  object btnNewMapping: TButton
+    Action = actNewMapping
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 96.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+  end
+  object gbUnitToNS: TGroupBox
+    Position.X = 24.000000000000000000
+    Position.Y = 131.000000000000000000
+    Size.Width = 481.000000000000000000
+    Size.Height = 193.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Lookup namespaces for unit'
+    TabOrder = 5
+    object edUnitToFind: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Position.X = 144.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 145.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lblUnitToFind: TLabel
+      Position.X = 24.000000000000000000
+      Position.Y = 35.000000000000000000
+      Text = 'Name of unit:'
+      TabOrder = 3
+      TabStop = False
+    end
+    object lblFoundNS: TLabel
+      Position.X = 24.000000000000000000
+      Position.Y = 80.000000000000000000
+      Text = 'Namespace(s):'
+      TabOrder = 0
+      TabStop = False
+    end
+    object btnFindNS: TButton
+      Action = actFindNS
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 328.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object btnCopyFullName: TButton
+      Action = actCopyFullName
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 328.000000000000000000
+      Position.Y = 80.000000000000000000
+      Size.Width = 129.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+    end
+    object lbFoundNS: TListBox
+      Position.X = 144.000000000000000000
+      Position.Y = 80.000000000000000000
+      Size.Width = 145.000000000000000000
+      Size.Height = 97.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 141.000000000000000000
+      Viewport.Height = 93.000000000000000000
+    end
+  end
+  object gbUnitInNS: TGroupBox
+    Position.X = 24.000000000000000000
+    Position.Y = 345.000000000000000000
+    Size.Width = 481.000000000000000000
+    Size.Height = 233.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Lookup units in namespace'
+    TabOrder = 6
+    object lblChooseNS: TLabel
+      Position.X = 24.000000000000000000
+      Position.Y = 43.000000000000000000
+      Text = 'Choose namespace:'
+      TabOrder = 0
+      TabStop = False
+    end
+    object lblUnitsInNS: TLabel
+      Position.X = 24.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 97.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Units:'
+      TabOrder = 2
+      TabStop = False
+    end
+    object cbChooseNS: TComboBox
+      Position.X = 144.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 193.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnChange = cbChooseNSChange
+    end
+    object lbUnitsInNS: TListBox
+      Position.X = 144.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 193.000000000000000000
+      Size.Height = 128.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 189.000000000000000000
+      Viewport.Height = 124.000000000000000000
+    end
+  end
+  object btnEditMapping: TButton
+    Action = actEditMapping
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 240.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object lblMappings: TLabel
+    Position.X = 24.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Mappings:'
+    TabOrder = 0
+    TabStop = False
+  end
+  object btnDeleteMapping: TButton
+    Action = actDeleteMapping
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 384.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+  end
+  object btnExit: TButton
+    Action = actExit
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 384.000000000000000000
+    Position.Y = 592.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 99
+  end
+  object alMain: TActionList
+    Left = 40
+    Top = 528
+    object actFindNS: TAction
+      Text = 'Find Namespace(s)'
+      OnExecute = actFindNSExecute
+      OnUpdate = actFindNSUpdate
+    end
+    object actCopyFullName: TAction
+      Text = 'Copy Full Name'
+      OnExecute = actCopyFullNameExecute
+      OnUpdate = actCopyFullNameUpdate
+    end
+    object actEditMapping: TAction
+      Text = 'Edit Mapping...'
+      OnExecute = actEditMappingExecute
+      OnUpdate = actEditMappingUpdate
+    end
+    object actNewMapping: TAction
+      Text = 'New Mapping...'
+      OnExecute = actNewMappingExecute
+    end
+    object actDeleteMapping: TAction
+      Text = 'Delete Mapping'
+      OnExecute = actDeleteMappingExecute
+      OnUpdate = actDeleteMappingUpdate
+    end
+    object actExit: TAction
+      Text = 'Exit'
+      OnExecute = actExitExecute
+    end
+  end
+end

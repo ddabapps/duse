@@ -1,0 +1,242 @@
+object MappingEditorBaseDlg: TMappingEditorBaseDlg
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'Form1'
+  ClientHeight = 546
+  ClientWidth = 433
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lblName: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 41.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Name'
+    TabOrder = 0
+    TabStop = False
+  end
+  object gbEdit: TGroupBox
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 433.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Edit Mapping'
+    TabOrder = 2
+    TabStop = False
+    object lbFullUnitNames: TListBox
+      Position.X = 16.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 217.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      OnDblClick = lbFullUnitNamesDblClick
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      OnKeyUp = lbFullUnitNamesKeyUp
+      Viewport.Width = 177.000000000000000000
+      Viewport.Height = 217.000000000000000000
+    end
+    object edNameEditor: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 7
+      Position.X = 208.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btnAdd: TButton
+      Action = actAdd
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 208.000000000000000000
+      Position.Y = 72.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 10
+    end
+    object btnUpdate: TButton
+      Action = actUpdate
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 208.000000000000000000
+      Position.Y = 104.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 13
+    end
+    object btnDelete: TButton
+      Action = actDelete
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 208.000000000000000000
+      Position.Y = 136.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 16
+    end
+    object lblAddHelp: TLabel
+      Position.X = 16.000000000000000000
+      Position.Y = 322.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      Text = 
+        'To add a unit enter its full name, with namespace in the edit bo' +
+        'x and click Add.'
+      TabOrder = 0
+      TabStop = False
+    end
+    object lblUpdateHelp: TLabel
+      Position.X = 16.000000000000000000
+      Position.Y = 354.000000000000000000
+      Size.Width = 361.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      Text = 
+        'To edit a unit name double click it in the list to copy it to th' +
+        'e edit list, make your changes, and click Update.'
+      TabOrder = 1
+      TabStop = False
+    end
+    object lblDeleteHelp: TLabel
+      Position.X = 16.000000000000000000
+      Position.Y = 394.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'To delete a unit double click it in the list and click Delete.'
+      TabOrder = 2
+      TabStop = False
+    end
+    object btnSort: TButton
+      Action = actSort
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 208.000000000000000000
+      Position.Y = 227.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 19
+    end
+    object btnReadSourceDir: TButton
+      Action = actReadSourceDir
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 16.000000000000000000
+      Position.Y = 282.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 22
+    end
+    object lblUnitNamesError: TLabel
+      StyledSettings = [Family, Size, Style]
+      Position.X = 16.000000000000000000
+      Position.Y = 249.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Please enter at least 2 units'
+      TabOrder = 30
+      TabStop = False
+    end
+    object btnClear: TButton
+      Action = actClear
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 208.000000000000000000
+      Position.Y = 176.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 18
+    end
+  end
+  object btnSaveClose: TButton
+    Action = actSaveClose
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 144.000000000000000000
+    Position.Y = 513.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 29
+  end
+  object btnCancel: TButton
+    Action = actCancel
+    Enabled = True
+    ImageIndex = -1
+    Position.X = 328.000000000000000000
+    Position.Y = 512.000000000000000000
+    Size.Width = 88.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 31
+  end
+  object edMappingName: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 64.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object alMain: TActionList
+    Left = 16
+    Top = 464
+    object actReadSourceDir: TAction
+      Text = 'Read Units From Source Folder...'
+      OnExecute = actReadSourceDirExecute
+    end
+    object actAdd: TAction
+      Text = 'Add'
+      OnExecute = actAddExecute
+      OnUpdate = actAddUpdate
+    end
+    object actUpdate: TAction
+      Text = 'Update'
+      OnExecute = actUpdateExecute
+      OnUpdate = actUpdateUpdate
+    end
+    object actDelete: TAction
+      Text = 'Delete'
+      OnExecute = actDeleteExecute
+      OnUpdate = actDeleteUpdate
+    end
+    object actSort: TAction
+      Text = 'Sort List'
+      OnExecute = actSortExecute
+      OnUpdate = actSortUpdate
+    end
+    object actSaveClose: TAction
+      Text = 'Save And Close'
+      OnUpdate = actSaveCloseUpdate
+    end
+    object actCancel: TAction
+      Text = 'Cancel'
+      OnExecute = actCancelExecute
+    end
+    object actClear: TAction
+      Text = 'Clear All'
+      OnExecute = actClearExecute
+      OnUpdate = actClearUpdate
+    end
+  end
+end
