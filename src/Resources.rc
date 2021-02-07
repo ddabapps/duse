@@ -3,7 +3,6 @@
 */
 MAINICON ICON "Res/Unit2NS.ico"
 
-
 /*
   Manifest file
 */
@@ -13,10 +12,8 @@ MAINICON ICON "Res/Unit2NS.ico"
   Resource file containing VERSIONINFO resource statement
   Produced by Version Information Editor from DelphiDabbler
 */
-
-#define VERINFO 1
-
-VERINFO VERSIONINFO
+                                                                                                                        \
+1 VERSIONINFO
 FILEVERSION 0, 1, 0, 0
 PRODUCTVERSION 0, 1, 0, 0
 FILEFLAGSMASK 0x00
@@ -42,3 +39,4 @@ FILETYPE VFT_APP
   VALUE "Translation", 0x0809, 1252
  }
 }
+
