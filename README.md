@@ -70,6 +70,10 @@ Contributions are welcome. The source code is on GitHub at https://github.com/de
 
 Please make a fork from the `develop` branch (**not** `master`) and create an new feature branch for your code. When ready please submit a pull request.
 
+### Compiling From Source
+
+_Unit2NS_ is written in Delphi Object Pascal and developed using Delphi 10.4.1 Sydney. The program can be compiled from within the IDE.
+
 ## Bugs and Feature Requests
 
 It's early days yet, so bugs are likely. Bug reports are welcomed. Please use the GitHub project's [_Issues_](https://github.com/delphidabbler/unit2ns/issues) feature to do that. Bug **fixes** are even more welcome!
