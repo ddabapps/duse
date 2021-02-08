@@ -1,4 +1,4 @@
-# .gitignore file for Keynote project
+# .gitignore file for Unit2NS project
 
 
 # Delphi generated temporary files and directories
@@ -8,6 +8,8 @@ __history
 *.local
 *.identcache
 *.res
+*.dsk
+*.~*
 
 
 # Project specific directories & files

@@ -1,0 +1,47 @@
+/*
+  Copyright (c) 2021, Peter Johnson, delphidabbler.com
+  MIT License
+  https://github.com/delphidabbler/unit2ns
+*/
+
+/*
+  Program's icon
+*/
+MAINICON ICON "Res/Unit2NS.ico"
+
+/*
+  Manifest file
+*/
+1 24 "Res/Unit2NS.manifest"
+
+/*
+  Resource file containing VERSIONINFO resource statement
+  Produced by Version Information Editor from DelphiDabbler
+*/                                                                                                                      \
+1 VERSIONINFO
+FILEVERSION 0, 1, 0, 0
+PRODUCTVERSION 0, 1, 0, 0
+FILEFLAGSMASK 0x00
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "080904E4"
+  {
+   VALUE "CompanyName", "DelphiDabbler.com\000"
+   VALUE "FileDescription", "Simple tool to display namespaces that various Delphi units belong to\000"
+   VALUE "FileVersion", "0.1.0\000"
+   VALUE "InternalName", "unit2ns\000"
+   VALUE "LegalCopyright", "Copyright (c) 2021, Peter Johnson, delphidabbler.com. Released under the MIT license.\000"
+   VALUE "OriginalFileName", "unit2ns.exe\000"
+   VALUE "ProductName", "unit2ns\000"
+   VALUE "ProductVersion", "0.1.0 beta\000"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x0809, 1252
+ }
+}
+
