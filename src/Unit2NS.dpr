@@ -22,10 +22,8 @@ uses
 {$R Resources.res}
 
 begin
-  {$IF defined(MSWINDOWS)}
-  {$WARN SYMBOL_PLATFORM OFF}
-  ReportMemoryLeaksOnShutdown := DebugHook <> 0;
-  {$WARN SYMBOL_PLATFORM ON}
+  {$IF defined(DEBUG)}
+  ReportMemoryLeaksOnShutdown := True;
   {$ENDIF}
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
