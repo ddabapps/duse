@@ -38,6 +38,7 @@ type
     procedure BuildOutput;
   public
     constructor Create(const UnitMap: TUnitMap);
+    destructor Destroy; override;
     procedure WriteFile;
   end;
 
@@ -174,6 +175,12 @@ begin
   inherited Create;
   fUnitMap := UnitMap;
   fBuilder := TStringBuilder.Create;
+end;
+
+destructor TMapFileWriter.Destroy;
+begin
+  fBuilder.Free;
+  inherited;
 end;
 
 procedure TMapFileWriter.WriteFile;

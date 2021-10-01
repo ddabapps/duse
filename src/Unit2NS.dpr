@@ -22,6 +22,9 @@ uses
 {$R Resources.res}
 
 begin
+  {$IF defined(DEBUG)}
+  ReportMemoryLeaksOnShutdown := True;
+  {$ENDIF}
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;
