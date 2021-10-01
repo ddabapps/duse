@@ -23,7 +23,9 @@ uses
 
 begin
   {$IF defined(MSWINDOWS)}
+  {$WARN SYMBOL_PLATFORM OFF}
   ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  {$WARN SYMBOL_PLATFORM ON}
   {$ENDIF}
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
