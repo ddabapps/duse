@@ -22,6 +22,9 @@ uses
 {$R Resources.res}
 
 begin
+  {$IF defined(MSWINDOWS)}
+  ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  {$ENDIF}
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;
