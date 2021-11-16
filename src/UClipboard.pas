@@ -17,7 +17,6 @@ type
   strict private
     class var
       fClipboard: IFMXClipboardService;
-      fClipboardSupported: Boolean;
   public
     class constructor Create;
     class destructor Destroy;
@@ -35,7 +34,7 @@ uses
 class constructor TClipboard.Create;
 begin
   inherited;
-  fClipboardSupported := TPlatformServices.Current.SupportsPlatformService(
+  TPlatformServices.Current.SupportsPlatformService(
     IFMXExtendedClipboardService, fClipboard
   );
 end;
@@ -48,7 +47,7 @@ end;
 
 class function TClipboard.IsClipboardSupported: Boolean;
 begin
-  Result := fClipboardSupported;
+  Result := Assigned(fClipboard);
 end;
 
 class procedure TClipboard.StoreText(const AText: string);
