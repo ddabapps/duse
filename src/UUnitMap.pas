@@ -87,7 +87,6 @@ type
   strict private
     var
       fList: TList<TUnitMap>;
-      fDirty: Boolean;
     function GetItem(const Idx: Integer): TUnitMap;
     procedure SetItem(const Idx: Integer; const Value: TUnitMap);
     function IndexOfName(const AName: string): Integer;
@@ -537,7 +536,6 @@ end;
 procedure TUnitMaps.SetItem(const Idx: Integer; const Value: TUnitMap);
 begin
   fList[Idx] := Value;
-  fDirty := True;
 end;
 
 end.
