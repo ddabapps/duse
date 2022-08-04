@@ -15,7 +15,6 @@ uses
 type
   TConfig = class(TObject)
   strict private
-  private
     class var
       fConfigData: TStringList;
     class procedure SetCurrentMapping(const Value: string); static;
