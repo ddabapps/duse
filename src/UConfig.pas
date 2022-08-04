@@ -1,5 +1,5 @@
 {
-  Copyright (c) 2021, Peter Johnson, delphidabbler.com
+  Copyright (c) 2021-2022, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/delphidabbler/unit2ns
 }
