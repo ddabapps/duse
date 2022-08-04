@@ -206,11 +206,11 @@ var
 begin
   if not fReader.GetNextLine(Line) then
     raise Exception.CreateFmt(
-      'Error reading unit map file"%0:s": file is empty.', [fFileName]
+      'Error reading unit map file "%0:s": file is empty.', [fFileName]
     );
   if not SameText(Line, FileHeader) then
     raise Exception.CreateFmt(
-      'Error reading unit map file"%0:s": invalid heading.', [fFileName]
+      'Error reading unit map file "%0:s": invalid heading.', [fFileName]
     );
 end;
 
@@ -257,17 +257,17 @@ var
 begin
   if fReader.AtEnd then
     raise Exception.CreateFmt(
-      'Error reading unit map file"%0:s": no map name present.', [fFileName]
+      'Error reading unit map file "%0:s": no map name present.', [fFileName]
     );
   if not SplitStr(Trim(fReader.GetNextLine), MapNameSeparator, Ident, Name)
     or not SameText(Ident, MapNameIdent) then
     raise Exception.CreateFmt(
-      'Error reading unit map file"%0:s": map name expected.', [fFileName]
+      'Error reading unit map file "%0:s": map name expected.', [fFileName]
     );
   Name := Trim(Name);
   if Name = '' then
     raise Exception.CreateFmt(
-      'Error reading unit map file"%0:s": no map name specified.', [fFileName]
+      'Error reading unit map file "%0:s": no map name specified.', [fFileName]
     );
   fUnitMap.Name := Name;
 end;
