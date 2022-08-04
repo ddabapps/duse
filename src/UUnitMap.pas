@@ -436,15 +436,10 @@ end;
 
 procedure TUnitMaps.Clear;
 var
-  Map: TUnitMap;
   Idx: Integer;
 begin
   for Idx := Pred(fList.Count) downto 0 do
-  begin
-    Map := fList[Idx];
-    fList.Delete(Idx);
-    Map.Free;
-  end;
+    DeleteItemAt(Idx);
 end;
 
 constructor TUnitMaps.Create;
@@ -471,7 +466,9 @@ procedure TUnitMaps.DeleteItemAt(const Idx: Integer);
 begin
   if (Idx < 0) or (Idx >= fList.Count) then
     raise EBug.Create('Attempt to delete item with invalid index.');
+  var Item: TUnitMap := fList[Idx];
   fList.Delete(Idx);
+  Item.Free;
 end;
 
 destructor TUnitMaps.Destroy;
