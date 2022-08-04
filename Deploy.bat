@@ -5,10 +5,13 @@
 ::
 :: This script uses MSBuild and Zip.exe
 
-:: To use the script start the Embarcadero RAD Studio Command Prompt to set the
-:: required environment variables for MSBuild.
-:: Next set the ZIPROOT environment variable to the directory where zip.exe is
-:: installed.
+:: To use the script:
+::   1) Start the Embarcadero RAD Studio Command Prompt to set the
+::      required environment variables for MSBuild.
+::   2) Set the ZIPROOT environment variable to the directory where zip.exe is
+::      installed.
+::   3) Change directory to the that where this script is located.
+::   4) Run the script
 ::
 :: Usage:
 ::   Deploy <version>
