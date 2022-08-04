@@ -6,6 +6,19 @@ All notable changes to this project are documented in this file. Releases are li
 
 The version numbering attempts to adhere to the principles of [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2022-08-04
+
+### Fixed
+
+* Memory leak caused by deleting mappings [issue #11].
+* Malformed error messages [issue #10].
+* Removed some redundant code [issues #5, #9 & #12].
+
+### Changed
+
+* Removed Android build targets from `.dproj` file.
+* Updates, corrections and clarifications in `README.md`.
+
 ## [0.1.1] - 2021-10-01 [HOTFIX]
 
 ### Fixed
@@ -22,5 +35,6 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 
 Initial beta release.
 
+[0.1.2]: https://github.com/delphidabbler/unit2ns/compare/v0.1.1-beta...v0.1.2-beta
 [0.1.1]: https://github.com/delphidabbler/unit2ns/compare/v0.1.0-beta...v0.1.1-beta
 [0.1.0]: https://github.com/delphidabbler/unit2ns/tree/v0.1.0-beta
