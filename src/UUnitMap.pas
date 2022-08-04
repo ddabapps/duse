@@ -1,5 +1,5 @@
 {
-  Copyright (c) 2021, Peter Johnson, delphidabbler.com
+  Copyright (c) 2021-2022, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/delphidabbler/unit2ns
 }
@@ -87,7 +87,6 @@ type
   strict private
     var
       fList: TList<TUnitMap>;
-      fDirty: Boolean;
     function GetItem(const Idx: Integer): TUnitMap;
     procedure SetItem(const Idx: Integer; const Value: TUnitMap);
     function IndexOfName(const AName: string): Integer;
@@ -437,15 +436,10 @@ end;
 
 procedure TUnitMaps.Clear;
 var
-  Map: TUnitMap;
   Idx: Integer;
 begin
   for Idx := Pred(fList.Count) downto 0 do
-  begin
-    Map := fList[Idx];
-    fList.Delete(Idx);
-    Map.Free;
-  end;
+    DeleteItemAt(Idx);
 end;
 
 constructor TUnitMaps.Create;
@@ -472,7 +466,9 @@ procedure TUnitMaps.DeleteItemAt(const Idx: Integer);
 begin
   if (Idx < 0) or (Idx >= fList.Count) then
     raise EBug.Create('Attempt to delete item with invalid index.');
+  var Item: TUnitMap := fList[Idx];
   fList.Delete(Idx);
+  Item.Free;
 end;
 
 destructor TUnitMaps.Destroy;
@@ -537,7 +533,6 @@ end;
 procedure TUnitMaps.SetItem(const Idx: Integer; const Value: TUnitMap);
 begin
   fList[Idx] := Value;
-  fDirty := True;
 end;
 
 end.
