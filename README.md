@@ -2,6 +2,8 @@
 
 A little tool for Delphi programmers to find the namespace(s) that a unit belongs to.
 
+> **NOTE:** The word "namespace(s)" is used incorrectly throughout this document. Wherever "namespace(s)" occurs, please read it as "scoped unit name(s)". And yes, that does mean the _Unit2NS_ is incorrectly named!
+
 ## Introduction
 
 Since the introduction of namespaces to Delphi I've been struggling to remember which namespaces some units belong to. OK, sometimes the code editor pops up a list of unit names in a namespace, but what I want is to type in a unit name and be told what namespace(s) the unit may belong to. Hence _Unit2NS_.
@@ -32,13 +34,13 @@ _Unit2NS_ is in very early beta, and there's no proper help system as yet. So th
 
 ### Getting started
 
-_Unit2NS_ uses what it calls "mappings" to look up up namespaces for a given unit. The idea is you can have different mappings for different versions of Delphi. So, before you can start using it you need to provide a at least one mapping.
+_Unit2NS_ uses what it calls "mappings" to look up up namespaces for a given unit. The idea is you can have different mappings for different versions of Delphi. So, before you can start using it you need to create at least one mapping.
 
-To do this, start the program and click the _New Mapping_ button. In the resulting dialogue box first give the mapping a sensible name.
+To do this, start the program and click the _New Mapping_ button. In the resulting dialogue box the first thing to do is to give the mapping a sensible name.
 
 Now you need to provide it with a list of namespaces and units. There are two ways to do this at present. The first is to enter a fully specified unit name in the edit box above the _Add_ button, e.g. `System.SysUtils` and then click _Add_. Keep doing this until you've entered all the units you need. Tedious huh?
 
-Secondly you can choose the _Read Units From Source Folder_ button. This opens a dialogue box where you choose a directory containing some Pascal source code. Selecting a folder causes every Pascal unit in that folder, and all it's sub-folders, to be read into the mapping. So, if you choose your version of Delphi's `source` folder you'll load every unit Delphi provides into your new mapping. You'll also get quite a few you probably don't want, but that's not really a problem. You can delete any units you don't want by selecting them in the list and clicking the _Delete_ button.
+The second (and much easier) method is to choose the _Read Units From Source Folder_ button. This opens a dialogue box where you choose a directory containing some Pascal source code. Selecting a folder causes every Pascal unit in that folder, and all it's sub-folders, to be read into the mapping. So, if you choose your version of Delphi's `source` folder you'll load every unit Delphi provides into your new mapping. You'll also get quite a few you probably don't want, but that's not really a problem. You can delete any units you don't want by selecting them in the list and clicking the _Delete_ button.
 
 Once you're done click the _Save And Close_ button to save the mapping.
 
@@ -58,7 +60,7 @@ At present you can't rename a namespace.
 
 ## License
 
-_Unit2NS_ is copyright © 2021, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/delphidabbler/unit2ns/blob/master/LICENSE) file included in the root of the GitHub repository for details.
+_Unit2NS_ is copyright © 2021-2022, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/delphidabbler/unit2ns/blob/master/LICENSE) file included in the root of the GitHub repository for details.
 
 ## Changelog
 
@@ -66,9 +68,13 @@ See the file [CHANGELOG.md](https://github.com/delphidabbler/unit2ns/blob/master
 
 ## Contributing
 
-Contributions are welcome. The source code is on GitHub at https://github.com/delphidabbler/unit2ns.
+Contributions are welcome. The source code is in the [`delphidabbler/unit2ns`](https://github.com/delphidabbler/unit2ns) project on GitHub.
 
-Please make a fork from the `develop` branch (**not** `master`) and create an new feature branch for your code. When ready please submit a pull request.
+I'm using the [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/) methodology.
+
+Please make a fork from the `develop` branch (**not** `master`) and create a new feature branch† for your code. When ready please submit a pull request.
+
+> † Feature branches should be named in the form `feature/my-feature-name`. If you're fixing/implementing an issue then please prepend the issue number to the branch name like this `feature/#99-abbreviated-issue-name`.
 
 ### Compiling From Source
 
