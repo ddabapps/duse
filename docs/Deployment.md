@@ -1,25 +1,38 @@
-# Release Builds & Deployment
+# Building & Deploying Releases
 
-_Unit2NS_ is written in Delphi Pascal and was developed using Delphi 10.4.1 Sydney. Debug builds and draft releases can be built entirely from within the Delphi IDE.
+_Unit2NS_ is written in Delphi Pascal and was developed using Delphi 11 Alexandria.
 
-Releases for deployment are created using the `Deploy.bat` script that can be found in the Git repository root.
+While debug builds and draft releases can be built entirely from within the Delphi IDE, releases for deployment are created using the `Deploy.bat` script that can be found in the Git repository root. The script uses _MSBuild_ and requires _InfoZip_'s version of [`zip.exe`](http://infozip.sourceforge.net/) to be installed.
 
-The script depends on both _MSBuild_ and _InfoZip_'s version of `zip.exe`.
+To create a release build using `Deploy.bat` proceed as follows:
 
-The required environment is set up by starting the Delphi Sydney RAD Studio Command Prompt from the Windows start menu and then:
+1. Start the Delphi Alexandria RAD Studio Command Prompt from the Windows start menu.
 
-1. Create an environment variable named `ZipRoot` that must be set to the directory containing `zip.exe`.
+2. Create an environment variable named `ZipRoot` whose value is the fully specified name of the directory containing `zip.exe`, without a trailing backslash. E.g.:
 
-2. `cd` into the project folder where the Git repository was cloned.
+    ```shell
+    set ZipRoot=C:\Utils
+    ```
 
-3. Run `Deploy.bat` passing a suitable version number on the command line. Version numbers should be in the form `9.9.9` or `9.9.9-beta`.
+3. If you have not already done so, `cd` into some suitable directory then `git clone` the source code from [GitHub](https://github.com/delphidabbler/unit2ns). E.g.:
+    
+    ```shell
+    cd D:\Projects
+    git clone https://github.com/delphidabbler/unit2ns.git unit2ns
+    ```
 
-The script will now build both the Windows 32 and 64 bit release versions of the program. The resulting `.exe` files are renamed `Unit2NS32.exe` and `Unit2NS64.exe` respectively.
+4. `cd` into the _Unit2NS_ source code directory.
 
-The `.exe` files are then compressed into separate `.zip` files, one each for the 32 bit and 64 bit release. A read-me file then added to the `.zip` files.
+5. Run `Deploy.bat` passing the release's version number as a parameter. Version numbers should be in the form `9.9.9` or `9.9.9-beta`. E.g.:
 
-The `.zip` files are named `unit2ns-64bit-<version>.zip` and `unit2ns-64bit-<version>.zip` where `<version>` is the version number passed on the command line. The zip files will be placed in the `_build\release` subdirectory of the project folder.
+    ```shell
+    Deploy 0.3.4-beta
+    ```
 
-The `.zip` files are then deployed.
+The script will now build both the Windows 32 and 64 bit release versions of the program. The resulting `.exe` files will be named `Unit2NS32.exe` and `Unit2NS64.exe` respectively.
 
-Finally the whole `_build` directory can be deleted.
+Each `.exe` file is then compressed into a separate `.zip` file. A read-me file is included in each `.zip` file. The files are named `unit2ns-32bit-<version>.zip` and `unit2ns-64bit-<version>.zip` where `<version>` is the version number that was passed to `Deploy.bat`. The zip files will be created in the `_build\release` subdirectory.
+
+The `.zip` files can then be deployed.
+
+Finally the whole `_build` subdirectory can be deleted.
