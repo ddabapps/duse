@@ -9,13 +9,20 @@ unit FmMappingEditorBase;
 interface
 
 uses
-  UExceptions, UUnitMap,
+  UExceptions,
+  UUnitMap,
 
-  System.SysUtils, System.Types, System.UITypes, System.Classes,
-  System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FMX.Layouts, FMX.ListBox,
-  System.Actions, FMX.ActnList;
+  System.Classes,
+  System.Actions,
+  FMX.ActnList,
+  FMX.StdCtrls,
+  FMX.Edit,
+  FMX.Layouts,
+  FMX.ListBox,
+  FMX.Types,
+  FMX.Controls,
+  FMX.Controls.Presentation,
+  FMX.Forms;
 
 type
   TMappingEditorBaseDlg = class(TForm)
@@ -45,6 +52,8 @@ type
     lblUnitNamesError: TLabel;
     btnClear: TButton;
     actClear: TAction;
+    btnDelphiInstalls: TButton;
+    actDelphiInstalls: TAction;
     procedure actAddExecute(Sender: TObject);
     procedure actAddUpdate(Sender: TObject);
     procedure actUpdateExecute(Sender: TObject);
@@ -62,6 +71,8 @@ type
     procedure actClearExecute(Sender: TObject);
     procedure actClearUpdate(Sender: TObject);
     procedure actSaveCloseUpdate(Sender: TObject);
+    procedure actDelphiInstallsUpdate(Sender: TObject);
+    procedure actDelphiInstallsExecute(Sender: TObject);
   strict private
     function GetNameEditorText: string;
     function IsNameEditorTextValid: Boolean;
@@ -73,6 +84,7 @@ type
     procedure ClearAndFocusUnitNameEdit;
     procedure UpdateUnitListErrorReport;
     procedure ClearAllEntries;
+    procedure BuildMapFromDir(const Dir: string);
   strict protected
     procedure PopulateFullUnitNamesList;
     function GetUnitMap: TUnitMap; virtual; abstract;
@@ -86,7 +98,12 @@ implementation
 
 uses
   UDataIO,
+  UDelphiInstalls,
+  FmDelphiInstallSelector,
   FMX.DialogService,
+  FMX.Dialogs,
+  System.SysUtils,
+  System.UITypes,
   System.IOUtils;
 
 resourcestring
@@ -175,22 +192,37 @@ begin
   (Sender as TAction).Enabled := IsFullUnitNameSelected;
 end;
 
+procedure TMappingEditorBaseDlg.actDelphiInstallsExecute(Sender: TObject);
+begin
+  var Dlg := TDelphiInstallSelectorDlg.Create(Self);
+  try
+    if Dlg.ShowModal = mrOK then
+    begin
+      if not TDelphiInstalls.NameExists(Dlg.SelectedDelphi) then
+        raise EBug.CreateFmt(
+          'Selected Delphi compiler name "%s" is not valid',
+          [Dlg.SelectedDelphi]
+        );
+      var SrcDir := TDelphiInstalls.GetSrcPath(Dlg.SelectedDelphi);
+      BuildMapFromDir(SrcDir);
+    end;
+  finally
+    Dlg.Free;
+  end;
+end;
+
+procedure TMappingEditorBaseDlg.actDelphiInstallsUpdate(Sender: TObject);
+begin
+  (Sender as TAction).Enabled := TDelphiInstalls.HaveInstalls;
+end;
+
 procedure TMappingEditorBaseDlg.actReadSourceDirExecute(Sender: TObject);
 var
   Dir: string;
-  ReadMap: TUnitMap;
 begin
   if not GetFileDirectory(Dir) then
     Exit;
-
-  ReadMap := TUnitMap.Create;
-  try
-    BuildMapFromFileSystem(Dir, ReadMap);
-    UpdateCurrentMap(ReadMap);
-    PopulateFullUnitNamesList;
-  finally
-    ReadMap.Free;
-  end;
+  BuildMapFromDir(Dir);
 end;
 
 procedure TMappingEditorBaseDlg.actSaveCloseUpdate(Sender: TObject);
@@ -251,6 +283,18 @@ procedure TMappingEditorBaseDlg.actUpdateUpdate(Sender: TObject);
 begin
   (Sender as TAction).Enabled := not IsNameEditorEmpty
     and IsFullUnitNameSelected;
+end;
+
+procedure TMappingEditorBaseDlg.BuildMapFromDir(const Dir: string);
+begin
+  var ReadMap := TUnitMap.Create;
+  try
+    BuildMapFromFileSystem(Dir, ReadMap);
+    UpdateCurrentMap(ReadMap);
+    PopulateFullUnitNamesList;
+  finally
+    ReadMap.Free;
+  end;
 end;
 
 procedure TMappingEditorBaseDlg.BuildMapFromFileSystem(const Dir: string;
