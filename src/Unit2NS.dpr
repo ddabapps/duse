@@ -17,7 +17,9 @@ uses
   UExceptions in 'UExceptions.pas',
   FmEditMapping in 'FmEditMapping.pas' {EditMappingDlg},
   FmNewMapping in 'FmNewMapping.pas' {NewMappingDlg},
-  UClipboard in 'UClipboard.pas';
+  UClipboard in 'UClipboard.pas',
+  UDelphiInstalls in 'UDelphiInstalls.pas',
+  FmDelphiInstallSelector in 'FmDelphiInstallSelector.pas' {DelphiInstallSelectorDlg};
 
 {$R Resources.res}
 

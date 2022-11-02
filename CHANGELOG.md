@@ -6,6 +6,26 @@ All notable changes to this project are documented in this file. Releases are li
 
 The version numbering attempts to adhere to the principles of [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2022-11-02
+
+### Fixed
+
+* Fixed potential access to method of nil object in configuration code [issue #16]
+* Fixed memory leak when sorting units in a mapping [issue #17]
+* Fixed and updated documentation [issue #14, PR #15]:
+  * Overhauled `Deployment.md` re change from compiling with Delphi 10.4 to Delphi 11.
+  * Overhauled `README.txt`.
+
+### Added
+
+* New button on mapping editor & new associated new dialogue box to choose an installed version of Delphi from whose source code directory to read units into a mapping. [issue #8]
+
+### Changed
+
+* Switched off all automatic version numbering on .dproj file.
+* Refactored some code.
+* Corrected comments in `Deploy.bat`.
+
 ## [0.1.2] - 2022-08-04
 
 ### Fixed
@@ -35,6 +55,7 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 
 Initial beta release.
 
+[0.2.0]: https://github.com/delphidabbler/unit2ns/compare/v0.1.2-beta...v0.2.0-beta
 [0.1.2]: https://github.com/delphidabbler/unit2ns/compare/v0.1.1-beta...v0.1.2-beta
 [0.1.1]: https://github.com/delphidabbler/unit2ns/compare/v0.1.0-beta...v0.1.1-beta
 [0.1.0]: https://github.com/delphidabbler/unit2ns/tree/v0.1.0-beta

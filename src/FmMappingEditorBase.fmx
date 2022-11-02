@@ -3,7 +3,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
   Top = 0
   BorderStyle = Single
   Caption = 'Form1'
-  ClientHeight = 546
+  ClientHeight = 576
   ClientWidth = 433
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -22,10 +22,10 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     TabStop = False
   end
   object gbEdit: TGroupBox
-    Position.X = 16.000000000000000000
-    Position.Y = 64.000000000000000000
+    Position.X = 32.000000000000000000
+    Position.Y = 65.000000000000000000
     Size.Width = 401.000000000000000000
-    Size.Height = 433.000000000000000000
+    Size.Height = 464.000000000000000000
     Size.PlatformDefault = False
     Text = 'Edit Mapping'
     TabOrder = 2
@@ -36,7 +36,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 217.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 4
+      TabOrder = 3
       OnDblClick = lbFullUnitNamesDblClick
       DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
@@ -48,7 +48,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     end
     object edNameEditor: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
-      TabOrder = 7
+      TabOrder = 4
       Position.X = 208.000000000000000000
       Position.Y = 32.000000000000000000
       Size.Width = 177.000000000000000000
@@ -64,7 +64,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 10
+      TabOrder = 5
     end
     object btnUpdate: TButton
       Action = actUpdate
@@ -75,7 +75,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 13
+      TabOrder = 6
     end
     object btnDelete: TButton
       Action = actDelete
@@ -86,13 +86,14 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 16
+      TabOrder = 7
     end
     object lblAddHelp: TLabel
+      AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 322.000000000000000000
+      Position.Y = 346.000000000000000000
       Size.Width = 369.000000000000000000
-      Size.Height = 33.000000000000000000
+      Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       Text = 
         'To add a unit enter its full name, with namespace in the edit bo' +
@@ -101,10 +102,11 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       TabStop = False
     end
     object lblUpdateHelp: TLabel
+      AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 354.000000000000000000
-      Size.Width = 361.000000000000000000
-      Size.Height = 41.000000000000000000
+      Position.Y = 384.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       Text = 
         'To edit a unit name double click it in the list to copy it to th' +
@@ -113,10 +115,11 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       TabStop = False
     end
     object lblDeleteHelp: TLabel
+      AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 394.000000000000000000
+      Position.Y = 423.000000000000000000
       Size.Width = 369.000000000000000000
-      Size.Height = 17.000000000000000000
+      Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
       Text = 'To delete a unit double click it in the list and click Delete.'
       TabOrder = 2
@@ -131,7 +134,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 19
+      TabOrder = 9
     end
     object btnReadSourceDir: TButton
       Action = actReadSourceDir
@@ -142,7 +145,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 369.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 22
+      TabOrder = 10
     end
     object lblUnitNamesError: TLabel
       StyledSettings = [Family, Size, Style]
@@ -152,7 +155,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
       Text = 'Please enter at least 2 units'
-      TabOrder = 30
+      TabOrder = 12
       TabStop = False
     end
     object btnClear: TButton
@@ -164,7 +167,18 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 18
+      TabOrder = 8
+    end
+    object btnDelphiInstalls: TButton
+      Action = actDelphiInstalls
+      Enabled = True
+      ImageIndex = 0
+      Position.X = 16.000000000000000000
+      Position.Y = 312.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
     end
   end
   object btnSaveClose: TButton
@@ -172,7 +186,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     Enabled = True
     ImageIndex = -1
     Position.X = 144.000000000000000000
-    Position.Y = 513.000000000000000000
+    Position.Y = 537.000000000000000000
     Size.Width = 145.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -183,7 +197,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     Enabled = True
     ImageIndex = -1
     Position.X = 328.000000000000000000
-    Position.Y = 512.000000000000000000
+    Position.Y = 536.000000000000000000
     Size.Width = 88.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -237,6 +251,11 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Text = 'Clear All'
       OnExecute = actClearExecute
       OnUpdate = actClearUpdate
+    end
+    object actDelphiInstalls: TAction
+      Text = 'Read Units From Delphi Installation...'
+      OnExecute = actDelphiInstallsExecute
+      OnUpdate = actDelphiInstallsUpdate
     end
   end
 end

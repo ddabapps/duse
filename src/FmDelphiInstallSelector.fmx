@@ -1,0 +1,65 @@
+object DelphiInstallSelectorDlg: TDelphiInstallSelectorDlg
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'Select Compiler'
+  ClientHeight = 282
+  ClientWidth = 265
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lbDelphis: TListBox
+    Position.X = 7.000000000000000000
+    Position.Y = 47.000000000000000000
+    Size.Width = 249.000000000000000000
+    Size.Height = 185.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 245.000000000000000000
+    Viewport.Height = 181.000000000000000000
+  end
+  object lblDelphis: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 249.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Choose a Delphi compiler to load source code from:'
+    TabOrder = 0
+  end
+  object btnOK: TButton
+    Action = actOK
+    Default = True
+    Enabled = True
+    ImageIndex = -1
+    ModalResult = 1
+    Position.X = 80.000000000000000000
+    Position.Y = 248.000000000000000000
+    TabOrder = 2
+  end
+  object btnCancel: TButton
+    ModalResult = 2
+    Position.X = 176.000000000000000000
+    Position.Y = 248.000000000000000000
+    TabOrder = 3
+    Text = 'Cancel'
+  end
+  object alMain: TActionList
+    Left = 8
+    Top = 232
+    object actOK: TAction
+      Text = 'OK'
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
+    end
+  end
+end
