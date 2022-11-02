@@ -299,11 +299,14 @@ end;
 
 procedure TUnitMap.SortByFullUnitName;
 begin
-  fMap.Sort(
-    TDelegatedComparer<TEntry>.Create(
-      TEntry.CompareFullUnitNames
-    )
+  var Comparer := TDelegatedComparer<TEntry>.Create(
+    TEntry.CompareFullUnitNames
   );
+  try
+    fMap.Sort(Comparer);
+  finally
+    Comparer.Free;
+  end;
 end;
 
 function TUnitMap.TryFind(const UnitName, Namespace: string;
