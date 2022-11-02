@@ -15,24 +15,27 @@ uses
 type
   TConfig = class(TObject)
   strict private
-    class var
-      fConfigData: TStringList;
+    type
+      TPersistentData = class(TObject)
+      strict private
+        class var fData: TStringList;
+        class function ConfigFilePath: string;
+      public
+        class destructor Destroy;
+        class function Data: TStringList;
+        class procedure Save;
+      end;
+
     class procedure SetCurrentMapping(const Value: string); static;
-    class function GetAppPath: string;
-    class function ConfigFilePath: string;
-    class procedure WriteConfigFile;
-    class procedure ReadConfigFile;
-    class function GetConfigItemStr(const Key: string): string;
-    class procedure SetConfigItemStr(const Key, Value: string);
     class function GetCurrentMapping: string; static;
+    class function GetAppPath: string;
+    class procedure SetConfigItemStr(const Key, Value: string);
   public
     const
       MapFilesRelativeRoot = 'config\mappings';
       ConfigFileRelativeName = 'config\config.data';
       KeyValueSeparator = ':';
       CurrentMappingKey = 'current.mapping';
-
-    class destructor Destroy;
 
     class function MapFilesRoot: string;
     class function TextFileEncoding: TEncoding; inline;
@@ -48,31 +51,14 @@ uses
 
 { TConfig }
 
-class function TConfig.ConfigFilePath: string;
-begin
-  Result := TPath.Combine(GetAppPath, ConfigFileRelativeName);
-end;
-
-class destructor TConfig.Destroy;
-begin
-  fConfigData.Free;
-end;
-
 class function TConfig.GetAppPath: string;
 begin
   Result := TPath.GetDirectoryName(ParamStr(0));
 end;
 
-class function TConfig.GetConfigItemStr(const Key: string): string;
-begin
-  if not Assigned(fConfigData) then
-    ReadConfigFile;
-  Result := fConfigData.Values[Key];
-end;
-
 class function TConfig.GetCurrentMapping: string;
 begin
-  Result := GetConfigItemStr(CurrentMappingKey);
+  Result := TPersistentData.Data.Values[CurrentMappingKey];
 end;
 
 class function TConfig.MapFilesRoot: string;
@@ -80,19 +66,10 @@ begin
   Result := TPath.Combine(GetAppPath, MapFilesRelativeRoot);
 end;
 
-class procedure TConfig.ReadConfigFile;
-begin
-  fConfigData.Free;
-  fConfigData := TStringList.Create;
-  fConfigData.NameValueSeparator := KeyValueSeparator;
-  if TFile.Exists(ConfigFilePath) then
-    fConfigData.LoadFromFile(ConfigFilePath, TextFileEncoding);
-end;
-
 class procedure TConfig.SetConfigItemStr(const Key, Value: string);
 begin
-  fConfigData.Values[Key] := Value;
-  WriteConfigFile;
+  TPersistentData.Data.Values[Key] := Value;
+  TPersistentData.Save;
 end;
 
 class procedure TConfig.SetCurrentMapping(const Value: string);
@@ -105,10 +82,34 @@ begin
   Result := TEncoding.UTF8;
 end;
 
-class procedure TConfig.WriteConfigFile;
+{ TConfig.TPersistentData }
+
+class function TConfig.TPersistentData.ConfigFilePath: string;
+begin
+  Result := TPath.Combine(TConfig.GetAppPath, ConfigFileRelativeName);
+end;
+
+class function TConfig.TPersistentData.Data: TStringList;
+begin
+  if not Assigned(fData) then
+  begin
+    fData := TStringList.Create;
+    fData.NameValueSeparator := TConfig.KeyValueSeparator;
+    if TFile.Exists(ConfigFilePath) then
+      fData.LoadFromFile(ConfigFilePath, TConfig.TextFileEncoding);
+  end;
+  Result := fData;
+end;
+
+class destructor TConfig.TPersistentData.Destroy;
+begin
+  fData.Free;
+end;
+
+class procedure TConfig.TPersistentData.Save;
 begin
   TDirectory.CreateDirectory(TPath.GetDirectoryName(ConfigFilePath));
-  fConfigData.SaveToFile(ConfigFilePath, TextFileEncoding);
+  Data.SaveToFile(ConfigFilePath, TConfig.TextFileEncoding);
 end;
 
 end.
