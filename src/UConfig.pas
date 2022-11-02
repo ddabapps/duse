@@ -21,10 +21,10 @@ type
     class function GetAppPath: string;
     class function ConfigFilePath: string;
     class procedure WriteConfigFile;
-    class procedure ReadConfigFile;
     class function GetConfigItemStr(const Key: string): string;
     class procedure SetConfigItemStr(const Key, Value: string);
     class function GetCurrentMapping: string; static;
+    class function GetConfigData: TStringList;
   public
     const
       MapFilesRelativeRoot = 'config\mappings';
@@ -63,11 +63,21 @@ begin
   Result := TPath.GetDirectoryName(ParamStr(0));
 end;
 
-class function TConfig.GetConfigItemStr(const Key: string): string;
+class function TConfig.GetConfigData: TStringList;
 begin
   if not Assigned(fConfigData) then
-    ReadConfigFile;
-  Result := fConfigData.Values[Key];
+  begin
+    fConfigData := TStringList.Create;
+    fConfigData.NameValueSeparator := KeyValueSeparator;
+    if TFile.Exists(ConfigFilePath) then
+      fConfigData.LoadFromFile(ConfigFilePath, TextFileEncoding);
+  end;
+  Result := fConfigData;
+end;
+
+class function TConfig.GetConfigItemStr(const Key: string): string;
+begin
+  Result := GetConfigData.Values[Key];
 end;
 
 class function TConfig.GetCurrentMapping: string;
@@ -80,18 +90,9 @@ begin
   Result := TPath.Combine(GetAppPath, MapFilesRelativeRoot);
 end;
 
-class procedure TConfig.ReadConfigFile;
-begin
-  fConfigData.Free;
-  fConfigData := TStringList.Create;
-  fConfigData.NameValueSeparator := KeyValueSeparator;
-  if TFile.Exists(ConfigFilePath) then
-    fConfigData.LoadFromFile(ConfigFilePath, TextFileEncoding);
-end;
-
 class procedure TConfig.SetConfigItemStr(const Key, Value: string);
 begin
-  fConfigData.Values[Key] := Value;
+  GetConfigData.Values[Key] := Value;
   WriteConfigFile;
 end;
 
@@ -108,7 +109,7 @@ end;
 class procedure TConfig.WriteConfigFile;
 begin
   TDirectory.CreateDirectory(TPath.GetDirectoryName(ConfigFilePath));
-  fConfigData.SaveToFile(ConfigFilePath, TextFileEncoding);
+  GetConfigData.SaveToFile(ConfigFilePath, TextFileEncoding);
 end;
 
 end.
