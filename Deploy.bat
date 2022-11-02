@@ -10,7 +10,7 @@
 ::      required environment variables for MSBuild.
 ::   2) Set the ZIPROOT environment variable to the directory where zip.exe is
 ::      installed.
-::   3) Change directory to the that where this script is located.
+::   3) Change directory to that where this script is located.
 ::   4) Run the script
 ::
 :: Usage:
