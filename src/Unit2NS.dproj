@@ -170,6 +170,11 @@ $(PreBuildEvent)]]></PreBuildEvent>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="UClipboard.pas"/>
+        <DCCReference Include="UDelphiInstalls.pas"/>
+        <DCCReference Include="FmDelphiInstallSelector.pas">
+            <Form>DelphiInstallSelectorDlg</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
