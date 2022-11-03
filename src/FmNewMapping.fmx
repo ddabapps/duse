@@ -3,46 +3,13 @@ inherited NewMappingDlg: TNewMappingDlg
   DesignerMasterStyle = 0
   inherited gbEdit: TGroupBox
     inherited lbFullUnitNames: TListBox
-      TabOrder = 0
-      Viewport.Width = 177.000000000000000000
-      Viewport.Height = 217.000000000000000000
-    end
-    inherited edNameEditor: TEdit
-      TabOrder = 1
-    end
-    inherited btnAdd: TButton
-      TabOrder = 2
-    end
-    inherited btnUpdate: TButton
-      TabOrder = 4
-    end
-    inherited btnDelete: TButton
-      TabOrder = 7
-    end
-    inherited lblAddHelp: TLabel
-      TabOrder = 10
+      Viewport.Width = 173.000000000000000000
+      Viewport.Height = 213.000000000000000000
     end
     inherited lblUpdateHelp: TLabel
       Text = 
         'To edit a unit name double click it in the list to copy it to th' +
         'e edit box, make your changes, and click Update.'
-      TabOrder = 13
-    end
-    inherited lblDeleteHelp: TLabel
-      Text = 'To delete a unit select it in the list and click Delete.'
-      TabOrder = 16
-    end
-    inherited btnSort: TButton
-      TabOrder = 15
-    end
-    inherited btnReadSourceDir: TButton
-      TabOrder = 19
-    end
-    inherited lblUnitNamesError: TLabel
-      TabOrder = 31
-    end
-    inherited btnClear: TButton
-      TabOrder = 14
     end
   end
   inherited edMappingName: TEdit
@@ -56,7 +23,6 @@ inherited NewMappingDlg: TNewMappingDlg
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'lblNameError'
-    TabOrder = 28
     TabStop = False
   end
   inherited alMain: TActionList
