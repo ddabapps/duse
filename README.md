@@ -1,18 +1,16 @@
 # unit2ns
 
-A little tool for Delphi programmers to find the namespace(s) that a unit belongs to.
-
-> **NOTE:** The word "namespace(s)" is used incorrectly throughout this document. Wherever "namespace(s)" occurs, please read it as "scoped unit name(s)". And yes, that does mean the _Unit2NS_ is incorrectly named!
+A little tool for Delphi programmers to find the unit scope(s) that a unit belongs to.
 
 ## Introduction
 
-Since the introduction of namespaces to Delphi I've been struggling to remember which namespaces some units belong to. OK, sometimes the code editor pops up a list of unit names in a namespace, but what I want is to type in a unit name and be told what namespace(s) the unit may belong to. Hence _Unit2NS_.
+Since the introduction of unit scopes to Delphi I've been struggling to remember the names of the unit scopes that some units belong to. OK, sometimes the code editor pops up a list of units in a unit scope, but what I want is to type in a unit name and be told what unit scopes(s) the unit may belong to. Hence _Unit2NS_.
 
 ## Installation, Updating & Removal
 
 ### Installing
 
-_Unit2NS_ is available is either a 32 bit or 64 bit Windows application. Download the appropriate version from the _Releases_ tab on [GitHub](https://github.com/delphidabbler/unit2ns). The program comes in a zip file which you should unzip.
+_Unit2NS_ is available as either a 32 bit or 64 bit Windows application. Download the appropriate version from the _Releases_ tab on [GitHub](https://github.com/delphidabbler/unit2ns). The program comes in a zip file which you should unzip.
 
 There is no installer for this simple program. Simply copy the `.exe` file to a folder on your computer or on a USB drive. If you have the 32 bit version the executable file is named `Unit2NS32.exe` while the 64 bit version is `Unit2NS64.exe`. You can copy this `README.md` file to the same location if you wish.
 
@@ -34,29 +32,29 @@ _Unit2NS_ is in very early beta, and there's no proper help system as yet. So th
 
 ### Getting started
 
-_Unit2NS_ uses what it calls "mappings" to look up up namespaces for a given unit. The idea is you can have different mappings for different versions of Delphi. So, before you can start using it you need to create at least one mapping.
+_Unit2NS_ uses what it calls "mappings" to look up the names of unit scopes that a given unit may belong to. The idea is you can have different mappings for different versions of Delphi. So, before you can start using it you need to create at least one mapping.
 
 To do this, start the program and click the _New Mapping_ button. In the resulting dialogue box the first thing to do is to give the mapping a sensible name.
 
-Now you need to provide it with a list of namespaces and units. There are two ways to do this at present. The first is to enter a fully specified unit name in the edit box above the _Add_ button, e.g. `System.SysUtils` and then click _Add_. Keep doing this until you've entered all the units you need. Tedious huh?
+Now you need to provide it with a list of unit scopes and the units that belong to them. There are two ways to do this at present. The first is to enter a fully specified unit name (e.g. `System.SysUtils`) in the edit box above the _Add_ button, then click _Add_. Keep doing this until you've entered all the units you need. Tedious huh?
 
 The second (and much easier) method is to choose the _Read Units From Source Folder_ button. This opens a dialogue box where you choose a directory containing some Pascal source code. Selecting a folder causes every Pascal unit in that folder, and all it's sub-folders, to be read into the mapping. So, if you choose your version of Delphi's `source` folder you'll load every unit Delphi provides into your new mapping. You'll also get quite a few you probably don't want, but that's not really a problem. You can delete any units you don't want by selecting them in the list and clicking the _Delete_ button.
 
 Once you're done click the _Save And Close_ button to save the mapping.
 
-The new mapping will appear in the _Mappings_ drop down at the top of the main window, along with any others you've created. All mappings are saved in a `config` folder alongside the executable program and are loaded automatically the next time you start _Unit2NS_.
+The new mapping will appear in the _Mappings_ drop down at the top of the main window, along with any others you've created. All mappings are saved in the `config` folder alongside the executable program and are loaded automatically the next time you start _Unit2NS_.
 
 ### General use
 
-When you need to know what namespace a unit is in, enter it's name in the _Name Of Unit_ edit box of the main window. Click _Find Namespace(s)_ and any namespaces containing a unit of that name will appear in the list box below. Selecting the namespace you want then clicking _Copy Full Name_ puts the fully specified namespace and unit name on the clipboard ready for pasting into your code.
+When you need to know what unit scope a unit belongs to, enter the unit's name in the _Name of unit_ edit box in the main window. Click _Find unit scope(s)_ and the names of any unit scopes containing a unit of the given name will appear in the list box below. Selecting the unit scope name you want then clicking _Copy Full Name_ puts the fully specified unit name on the clipboard ready for pasting into your code.
 
-You will sometimes see a namespace called `<no namespace>`. That's just a dummy that indicates that the unit exists outside any namespace. When the dummy namespace is selected clicking _Copy Full Name_ simply puts the unqualified unit name on the clipboard.
+You will sometimes see a unit scope named `<no unit scope>`. That's just a dummy that indicates that the unit exists outside any uit scope. When the `<no unit scope>` is selected clicking _Copy Full Name_ simply puts the unqualified unit name on the clipboard.
 
-There's another little feature you might find useful if Delphi's code editor doesn't feel like showing you all the unit names in a namespace. In the _Lookup units in namespace_ box you can select any namespace from the _Choose namespace_ drop down to reveal all its units in the list below. This time selecting `<no namespace>` reveals all the units that exist outside a namespace.
+There's another little feature you might find useful if Delphi's code editor doesn't feel like showing you all the units belonging to a unit scope. In the _Lookup units in unit scope_ box you can select the name of any unit scope from the _Choose unit scope_ drop down to reveal all its units in the list below. This time selecting `<no unit scope>` reveals all the units that exist outside any unit scope.
 
 You can create new mappings, edit them or delete them whenever you wish. The buttons to do that are pretty self-explanatory!
 
-At present you can't rename a namespace.
+At present you can't rename a mapping.
 
 ## License
 

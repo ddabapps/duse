@@ -1,5 +1,5 @@
 {
-  Copyright (c) 2021, Peter Johnson, delphidabbler.com
+  Copyright (c) 2021-2022, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/delphidabbler/unit2ns
 }
@@ -20,22 +20,22 @@ type
   TMainForm = class(TForm)
     cbMappings: TComboBox;
     btnNewMapping: TButton;
-    gbUnitToNS: TGroupBox;
+    gbUnitToScope: TGroupBox;
     edUnitToFind: TEdit;
     lblUnitToFind: TLabel;
-    lblFoundNS: TLabel;
-    btnFindNS: TButton;
+    lblFoundScopes: TLabel;
+    btnFindScopes: TButton;
     btnCopyFullName: TButton;
-    gbUnitInNS: TGroupBox;
-    lblChooseNS: TLabel;
-    lblUnitsInNS: TLabel;
-    cbChooseNS: TComboBox;
-    lbUnitsInNS: TListBox;
+    gbUnitInScope: TGroupBox;
+    lblChooseScope: TLabel;
+    lblUnitsInScope: TLabel;
+    cbChooseScope: TComboBox;
+    lbUnitsInScope: TListBox;
     btnEditMapping: TButton;
     lblMappings: TLabel;
-    lbFoundNS: TListBox;
+    lbFoundScopes: TListBox;
     alMain: TActionList;
-    actFindNS: TAction;
+    actFindScope: TAction;
     actCopyFullName: TAction;
     actEditMapping: TAction;
     actNewMapping: TAction;
@@ -46,22 +46,22 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure actFindNSExecute(Sender: TObject);
-    procedure actFindNSUpdate(Sender: TObject);
+    procedure actFindScopeExecute(Sender: TObject);
+    procedure actFindScopeUpdate(Sender: TObject);
     procedure actCopyFullNameExecute(Sender: TObject);
     procedure actCopyFullNameUpdate(Sender: TObject);
     procedure actFindUnitsUpdate(Sender: TObject);
     procedure actNewMappingExecute(Sender: TObject);
     procedure actEditMappingExecute(Sender: TObject);
     procedure actEditMappingUpdate(Sender: TObject);
-    procedure cbChooseNSChange(Sender: TObject);
+    procedure cbChooseScopeChange(Sender: TObject);
     procedure actDeleteMappingExecute(Sender: TObject);
     procedure actDeleteMappingUpdate(Sender: TObject);
     procedure cbMappingsChange(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
   strict private
     const
-      EmptyNSDisplayText = '<no namespace>';
+      EmptyUniteScopeDisplayText = '<no unit scope>';
     var
       fUnitMaps: TUnitMaps;
     procedure ExceptionHandler(Sender: TObject; E: Exception);
@@ -72,14 +72,14 @@ type
     procedure WriteMapping(const Map: TUnitMap);
     procedure DeleteSelectedMapping;
 
-    function StandardNSToFriendlyNS(const SNS: string): string;
-    function FriendlyNSToStandardNS(const FNS: string): string;
+    function StandardUSNToFriendlyUSN(const StandardUSN: string): string;
+    function FriendlyUSNToStandardUSN(const FriendlyUSN: string): string;
 
     function SelectedUnitMap: TUnitMap;
     function IsUnitMapSelected: Boolean;
     function GetUnitToFindEditText: string;
     function IsUnitToFindEditEmpty: Boolean;
-    procedure DisplayUnitsInNS(const Units: array of string);
+    procedure DisplayUnitsInUnitScope(const Units: array of string);
   end;
 
 var
@@ -106,21 +106,21 @@ begin
     raise EBug.Create('Can''t access clipboard: not supported');
   if not IsUnitMapSelected then
     raise EBug.Create('Can''t check clipboard item: no mapping selected');
-  if lbFoundNS.ItemIndex < 0 then
-    raise EBug.Create('Can''t copy: no namespace selected');
+  if lbFoundScopes.ItemIndex < 0 then
+    raise EBug.Create('Can''t copy: no unit scope name selected');
   if IsUnitToFindEditEmpty then
     raise EBug.Create('Can''t copy: unit edit box is empty');
 
   if SelectedUnitMap.TryFind(
     GetUnitToFindEditText,
-    FriendlyNSToStandardNS(lbFoundNS.Selected.Text),
+    FriendlyUSNToStandardUSN(lbFoundScopes.Selected.Text),
     Entry
   ) then
     TClipboard.StoreText(Entry.GetFullUnitName)
   else
     raise EUser.Create(
       'Can''t find a matching entry in the current mapping.'#10
-      + 'Have you changed the unit name without pressing "Find Namespace(s)"'
+      + 'Have you changed the unit name without pressing "Find unit scope(s)"'
       + ' again?'
     );
 end;
@@ -129,7 +129,7 @@ procedure TMainForm.actCopyFullNameUpdate(Sender: TObject);
 begin
   (Sender as TAction).Visible := TClipboard.IsClipboardSupported;
   (Sender as TAction).Enabled := IsUnitMapSelected
-    and (lbFoundNS.ItemIndex >= 0)
+    and (lbFoundScopes.ItemIndex >= 0)
     and not IsUnitToFindEditEmpty;
 
 end;
@@ -189,40 +189,40 @@ begin
   Close;
 end;
 
-procedure TMainForm.actFindNSExecute(Sender: TObject);
+procedure TMainForm.actFindScopeExecute(Sender: TObject);
 var
-  Namespaces: TArray<string>;
-  NS: string;
+  UnitScopeNames: TArray<string>;
+  UnitScopeName: string;
 begin
   if IsUnitToFindEditEmpty then
-    raise EBug.Create('Can''t find name spaces: no unit name specified');
+    raise EBug.Create('Can''t find unit scope: no unit name specified');
   if not IsUnitMapSelected then
-    raise EBug.Create('Can''t find name spaces: no mapping is selected');
+    raise EBug.Create('Can''t find unit scope: no mapping is selected');
 
-  Namespaces := SelectedUnitMap.FindUnitNamespaces(GetUnitToFindEditText);
-  lbFoundNS.BeginUpdate;
+  UnitScopeNames := SelectedUnitMap.FindUnitScopes(GetUnitToFindEditText);
+  lbFoundScopes.BeginUpdate;
   try
-    lbFoundNS.Clear;
-    for NS in Namespaces do
-      lbFoundNS.Items.Add(StandardNSToFriendlyNS(NS));
-    lbFoundNS.Sort(
+    lbFoundScopes.Clear;
+    for UnitScopeName in UnitScopeNames do
+      lbFoundScopes.Items.Add(StandardUSNToFriendlyUSN(UnitScopeName));
+    lbFoundScopes.Sort(
       function (Left, Right: TFmxObject): Integer
       begin
         Result := CompareText(
-          lbFoundNS.Items[Left.Index], lbFoundNS.Items[Right.Index]
+          lbFoundScopes.Items[Left.Index], lbFoundScopes.Items[Right.Index]
         )
       end
     );
   finally
-    lbFoundNS.EndUpdate;
+    lbFoundScopes.EndUpdate;
   end;
-  if Length(Namespaces) > 0 then
-    lbFoundNS.ItemIndex := 0
+  if Length(UnitScopeNames) > 0 then
+    lbFoundScopes.ItemIndex := 0
   else
     ShowMessageFmt('Unit "%s" not found', [GetUnitToFindEditText]);
 end;
 
-procedure TMainForm.actFindNSUpdate(Sender: TObject);
+procedure TMainForm.actFindScopeUpdate(Sender: TObject);
 begin
   (Sender as TAction).Enabled := not IsUnitToFindEditEmpty
     and IsUnitMapSelected;
@@ -230,7 +230,7 @@ end;
 
 procedure TMainForm.actFindUnitsUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled := cbChooseNS.ItemIndex >= 0;
+  (Sender as TAction).Enabled := cbChooseScope.ItemIndex >= 0;
 end;
 
 procedure TMainForm.actNewMappingExecute(Sender: TObject);
@@ -245,18 +245,18 @@ begin
   end;
 end;
 
-procedure TMainForm.cbChooseNSChange(Sender: TObject);
+procedure TMainForm.cbChooseScopeChange(Sender: TObject);
 begin
   if not IsUnitMapSelected then
     Exit;
-  if cbChooseNS.ItemIndex < 0 then
+  if cbChooseScope.ItemIndex < 0 then
   begin
-    lbUnitsInNS.Clear;
+    lbUnitsInScope.Clear;
     Exit;
   end;
-  DisplayUnitsInNS(
-    SelectedUnitMap.FindNamespaceUnits(
-      FriendlyNSToStandardNS(cbChooseNS.Selected.Text)
+  DisplayUnitsInUnitScope(
+    SelectedUnitMap.FindUnitsInScope(
+      FriendlyUSNToStandardUSN(cbChooseScope.Selected.Text)
     )
   );
 end;
@@ -269,9 +269,9 @@ end;
 procedure TMainForm.ClearMappingDisplay;
 begin
   edUnitToFind.Text := '';
-  lbFoundNS.Clear;
-  cbChooseNS.Clear;
-  lbUnitsInNS.Clear;
+  lbFoundScopes.Clear;
+  cbChooseScope.Clear;
+  lbUnitsInScope.Clear;
 end;
 
 procedure TMainForm.DeleteSelectedMapping;
@@ -304,18 +304,18 @@ begin
   fUnitMaps.DeleteItem(DeleteMap);
 end;
 
-procedure TMainForm.DisplayUnitsInNS(const Units: array of string);
+procedure TMainForm.DisplayUnitsInUnitScope(const Units: array of string);
 var
   UnitName: string;
 begin
-  lbUnitsInNS.BeginUpdate;
+  lbUnitsInScope.BeginUpdate;
   try
-    lbUnitsInNS.Clear;
+    lbUnitsInScope.Clear;
     for UnitName in Units do
-      lbUnitsInNS.Items.Add(UnitName);
-    lbUnitsInNS.ItemIndex := -1;
+      lbUnitsInScope.Items.Add(UnitName);
+    lbUnitsInScope.ItemIndex := -1;
   finally
-    lbUnitsInNS.EndUpdate;
+    lbUnitsInScope.EndUpdate;
   end;
 end;
 
@@ -372,11 +372,11 @@ begin
   cbMappings.ItemIndex := LastNameIdx;
 end;
 
-function TMainForm.FriendlyNSToStandardNS(const FNS: string): string;
+function TMainForm.FriendlyUSNToStandardUSN(const FriendlyUSN: string): string;
 begin
-  if SameText(FNS, EmptyNSDisplayText) then
+  if SameText(FriendlyUSN, EmptyUniteScopeDisplayText) then
     Exit('');
-  Result := FNS;
+  Result := FriendlyUSN;
 end;
 
 function TMainForm.GetUnitToFindEditText: string;
@@ -443,45 +443,43 @@ begin
   Result := fUnitMaps.FindByName(Name);
 end;
 
-function TMainForm.StandardNSToFriendlyNS(const SNS: string): string;
+function TMainForm.StandardUSNToFriendlyUSN(const StandardUSN: string): string;
 begin
-  if SNS = '' then
-    Exit(EmptyNSDisplayText);
-  Result := SNS;
+  if StandardUSN = '' then
+    Exit(EmptyUniteScopeDisplayText);
+  Result := StandardUSN;
 end;
 
 procedure TMainForm.UpdateMappingDisplay;
 var
-  NSList: TArray<string>;
-  NS: string;
+  UnitScopeNameList: TArray<string>;
+  UnitScopeName: string;
 begin
   // Clear controls
   ClearMappingDisplay;
   // Get out if we have no mappings
   if fUnitMaps.IsEmpty or not IsUnitMapSelected then
     Exit;
-  // Populate namespaces list
-  NSList := SelectedUnitMap.FindUniqueNamespaces;
-  cbChooseNS.BeginUpdate;
+  // Populate unit scope names list
+  UnitScopeNameList := SelectedUnitMap.FindUniqueUnitScopes;
+  cbChooseScope.BeginUpdate;
   try
-    for NS in NSList do
-      cbChooseNS.Items.Add(
-        StandardNSToFriendlyNS(NS)
-      );
-    cbChooseNS.Sort(
+    for UnitScopeName in UnitScopeNameList do
+      cbChooseScope.Items.Add(StandardUSNToFriendlyUSN(UnitScopeName));
+    cbChooseScope.Sort(
       function (Left, Right: TFmxObject): Integer
       begin
         Result := CompareText(
-          cbChooseNS.Items[Left.Index], cbChooseNS.Items[Right.Index]
+          cbChooseScope.Items[Left.Index], cbChooseScope.Items[Right.Index]
         )
       end
     );
-    if cbChooseNS.Count > 0 then
-      cbChooseNS.ItemIndex := 0
+    if cbChooseScope.Count > 0 then
+      cbChooseScope.ItemIndex := 0
     else
-      cbChooseNS.ItemIndex := -1;
+      cbChooseScope.ItemIndex := -1;
   finally
-    cbChooseNS.EndUpdate;
+    cbChooseScope.EndUpdate;
   end;
 end;
 
