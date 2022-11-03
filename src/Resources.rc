@@ -30,7 +30,7 @@ FILETYPE VFT_APP
   BLOCK "080904E4"
   {
    VALUE "CompanyName", "DelphiDabbler.com\000"
-   VALUE "FileDescription", "Simple tool to display namespaces that various Delphi units belong to\000"
+   VALUE "FileDescription", "Simple tool to display the unit scopes that various Delphi units belong to\000"
    VALUE "FileVersion", "0.2.0\000"
    VALUE "InternalName", "unit2ns\000"
    VALUE "LegalCopyright", "Copyright (c) 2022, Peter Johnson, delphidabbler.com. Released under the MIT license.\000"
