@@ -2,59 +2,15 @@ inherited EditMappingDlg: TEditMappingDlg
   Caption = 'Edit Mappings'
   DesignerMasterStyle = 0
   inherited gbEdit: TGroupBox
-    TabOrder = 13
     inherited lbFullUnitNames: TListBox
-      TabOrder = 0
-      Viewport.Width = 173.000000000000000000
-      Viewport.Height = 213.000000000000000000
+      Viewport.Width = 177.000000000000000000
+      Viewport.Height = 217.000000000000000000
     end
-    inherited edNameEditor: TEdit
-      TabOrder = 1
-    end
-    inherited btnAdd: TButton
-      TabOrder = 2
-    end
-    inherited btnUpdate: TButton
-      TabOrder = 4
-    end
-    inherited btnDelete: TButton
-      TabOrder = 7
-    end
-    inherited lblAddHelp: TLabel
-      TabOrder = 10
-    end
-    inherited lblUpdateHelp: TLabel
-      TabOrder = 13
-    end
-    inherited lblDeleteHelp: TLabel
-      TabOrder = 16
-    end
-    inherited btnSort: TButton
-      TabOrder = 15
-    end
-    inherited btnReadSourceDir: TButton
-      TabOrder = 19
-    end
-    inherited lblUnitNamesError: TLabel
-      TabOrder = 27
-    end
-    inherited btnClear: TButton
-      TabOrder = 14
-    end
-  end
-  inherited btnSaveClose: TButton
-    TabOrder = 26
-  end
-  inherited btnCancel: TButton
-    TabOrder = 28
   end
   inherited edMappingName: TEdit
     Enabled = False
   end
   inherited alMain: TActionList
-    inherited actReadSourceDir: TAction
-      Text = 'Read Units From Source Folder'
-    end
     inherited actSaveClose: TAction
       OnExecute = actSaveCloseExecute
     end
