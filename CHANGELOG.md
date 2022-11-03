@@ -6,6 +6,15 @@ All notable changes to this project are documented in this file. Releases are li
 
 The version numbering attempts to adhere to the principles of [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2022-11-03 [HOTFIX]
+
+### Fixed
+
+* Fixed bugs in New Mapping and Edit Mapping dialogue boxes:
+  * Group box was shifted out of alignment [issue #22]
+  * Tab order was broken [issue #23]
+  * Some errors in help text section
+
 ## [0.2.0] - 2022-11-02
 
 ### Fixed
@@ -55,6 +64,7 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 
 Initial beta release.
 
+[0.2.1]: https://github.com/delphidabbler/unit2ns/compare/v0.2.0-beta...v0.2.1-beta
 [0.2.0]: https://github.com/delphidabbler/unit2ns/compare/v0.1.2-beta...v0.2.0-beta
 [0.1.2]: https://github.com/delphidabbler/unit2ns/compare/v0.1.1-beta...v0.1.2-beta
 [0.1.1]: https://github.com/delphidabbler/unit2ns/compare/v0.1.0-beta...v0.1.1-beta
