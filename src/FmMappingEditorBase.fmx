@@ -3,7 +3,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
   Top = 0
   BorderStyle = Single
   Caption = 'Form1'
-  ClientHeight = 576
+  ClientHeight = 568
   ClientWidth = 433
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -18,17 +18,16 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Name'
-    TabOrder = 0
     TabStop = False
   end
   object gbEdit: TGroupBox
-    Position.X = 32.000000000000000000
-    Position.Y = 65.000000000000000000
+    Position.X = 16.000000000000000000
+    Position.Y = 60.000000000000000000
     Size.Width = 401.000000000000000000
     Size.Height = 464.000000000000000000
     Size.PlatformDefault = False
     Text = 'Edit Mapping'
-    TabOrder = 2
+    TabOrder = 1
     TabStop = False
     object lbFullUnitNames: TListBox
       Position.X = 16.000000000000000000
@@ -36,19 +35,19 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 217.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 3
+      TabOrder = 0
       OnDblClick = lbFullUnitNamesDblClick
       DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       OnKeyUp = lbFullUnitNamesKeyUp
-      Viewport.Width = 177.000000000000000000
-      Viewport.Height = 217.000000000000000000
+      Viewport.Width = 173.000000000000000000
+      Viewport.Height = 213.000000000000000000
     end
     object edNameEditor: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
-      TabOrder = 4
+      TabOrder = 1
       Position.X = 208.000000000000000000
       Position.Y = 32.000000000000000000
       Size.Width = 177.000000000000000000
@@ -64,7 +63,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 5
+      TabOrder = 2
     end
     object btnUpdate: TButton
       Action = actUpdate
@@ -75,7 +74,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 6
+      TabOrder = 3
     end
     object btnDelete: TButton
       Action = actDelete
@@ -86,7 +85,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 7
+      TabOrder = 4
     end
     object lblAddHelp: TLabel
       AutoSize = True
@@ -98,7 +97,6 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Text = 
         'To add a unit enter its full name, with namespace in the edit bo' +
         'x and click Add.'
-      TabOrder = 0
       TabStop = False
     end
     object lblUpdateHelp: TLabel
@@ -110,8 +108,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.PlatformDefault = False
       Text = 
         'To edit a unit name double click it in the list to copy it to th' +
-        'e edit list, make your changes, and click Update.'
-      TabOrder = 1
+        'e edit box, make your changes, and click Update.'
       TabStop = False
     end
     object lblDeleteHelp: TLabel
@@ -121,8 +118,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 369.000000000000000000
       Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
-      Text = 'To delete a unit double click it in the list and click Delete.'
-      TabOrder = 2
+      Text = 'To delete a unit select it in the list and click Delete.'
       TabStop = False
     end
     object btnSort: TButton
@@ -134,7 +130,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 9
+      TabOrder = 6
     end
     object btnReadSourceDir: TButton
       Action = actReadSourceDir
@@ -145,7 +141,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 369.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 10
+      TabOrder = 7
     end
     object lblUnitNamesError: TLabel
       StyledSettings = [Family, Size, Style]
@@ -155,7 +151,6 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
       Text = 'Please enter at least 2 units'
-      TabOrder = 12
       TabStop = False
     end
     object btnClear: TButton
@@ -167,7 +162,7 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 177.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 8
+      TabOrder = 5
     end
     object btnDelphiInstalls: TButton
       Action = actDelphiInstalls
@@ -178,34 +173,34 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Width = 369.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 11
+      TabOrder = 8
     end
   end
   object btnSaveClose: TButton
     Action = actSaveClose
     Enabled = True
     ImageIndex = -1
-    Position.X = 144.000000000000000000
-    Position.Y = 537.000000000000000000
+    Position.X = 175.000000000000000000
+    Position.Y = 532.000000000000000000
     Size.Width = 145.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 29
+    TabOrder = 3
   end
   object btnCancel: TButton
     Action = actCancel
     Enabled = True
     ImageIndex = -1
     Position.X = 328.000000000000000000
-    Position.Y = 536.000000000000000000
+    Position.Y = 532.000000000000000000
     Size.Width = 88.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 31
+    TabOrder = 4
   end
   object edMappingName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 1
+    TabOrder = 0
     Position.X = 64.000000000000000000
     Position.Y = 16.000000000000000000
     Size.Width = 353.000000000000000000
