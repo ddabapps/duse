@@ -43,8 +43,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       OnKeyUp = lbFullUnitNamesKeyUp
-      Viewport.Width = 177.000000000000000000
-      Viewport.Height = 217.000000000000000000
+      Viewport.Width = 173.000000000000000000
+      Viewport.Height = 213.000000000000000000
     end
     object edNameEditor: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -96,8 +96,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       Text = 
-        'To add a unit enter its full name, with namespace in the edit bo' +
-        'x and click Add.'
+        'To add a unit enter its full name, prefixed with its unit scope ' +
+        'name, in the edit box and click Add.'
       TabOrder = 0
       TabStop = False
     end

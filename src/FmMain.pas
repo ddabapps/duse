@@ -61,7 +61,7 @@ type
     procedure actExitExecute(Sender: TObject);
   strict private
     const
-      EmptyNSDisplayText = '<no namespace>';
+      EmptyNSDisplayText = '<no unit scope>';
     var
       fUnitMaps: TUnitMaps;
     procedure ExceptionHandler(Sender: TObject; E: Exception);
@@ -107,7 +107,7 @@ begin
   if not IsUnitMapSelected then
     raise EBug.Create('Can''t check clipboard item: no mapping selected');
   if lbFoundNS.ItemIndex < 0 then
-    raise EBug.Create('Can''t copy: no namespace selected');
+    raise EBug.Create('Can''t copy: no unit scope name selected');
   if IsUnitToFindEditEmpty then
     raise EBug.Create('Can''t copy: unit edit box is empty');
 
@@ -120,7 +120,7 @@ begin
   else
     raise EUser.Create(
       'Can''t find a matching entry in the current mapping.'#10
-      + 'Have you changed the unit name without pressing "Find Namespace(s)"'
+      + 'Have you changed the unit name without pressing "Find unit scope(s)"'
       + ' again?'
     );
 end;
@@ -195,9 +195,9 @@ var
   NS: string;
 begin
   if IsUnitToFindEditEmpty then
-    raise EBug.Create('Can''t find name spaces: no unit name specified');
+    raise EBug.Create('Can''t find unit scope: no unit name specified');
   if not IsUnitMapSelected then
-    raise EBug.Create('Can''t find name spaces: no mapping is selected');
+    raise EBug.Create('Can''t find unit scope: no mapping is selected');
 
   Namespaces := SelectedUnitMap.FindUnitNamespaces(GetUnitToFindEditText);
   lbFoundNS.BeginUpdate;
@@ -460,7 +460,7 @@ begin
   // Get out if we have no mappings
   if fUnitMaps.IsEmpty or not IsUnitMapSelected then
     Exit;
-  // Populate namespaces list
+  // Populate unit scope names list
   NSList := SelectedUnitMap.FindUniqueNamespaces;
   cbChooseNS.BeginUpdate;
   try

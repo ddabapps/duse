@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   BorderStyle = Single
-  Caption = 'Unit2NS - Map Delphi Units To Namespaces'
+  Caption = 'Unit2NS - Map Delphi Units To Unit Scope Names'
   ClientHeight = 629
   ClientWidth = 529
   Position = ScreenCenter
@@ -39,7 +39,7 @@ object MainForm: TMainForm
     Size.Width = 481.000000000000000000
     Size.Height = 193.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Lookup namespaces for unit'
+    Text = 'Lookup unit scopes for unit'
     TabOrder = 5
     object edUnitToFind: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -60,7 +60,7 @@ object MainForm: TMainForm
     object lblFoundNS: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 80.000000000000000000
-      Text = 'Namespace(s):'
+      Text = 'Unit scope name(s):'
       TabOrder = 0
       TabStop = False
     end
@@ -74,6 +74,7 @@ object MainForm: TMainForm
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
+      Text = 'Find unit scope(s)'
     end
     object btnCopyFullName: TButton
       Action = actCopyFullName
@@ -107,12 +108,12 @@ object MainForm: TMainForm
     Size.Width = 481.000000000000000000
     Size.Height = 233.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Lookup units in namespace'
+    Text = 'Lookup units in unit scope'
     TabOrder = 6
     object lblChooseNS: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 43.000000000000000000
-      Text = 'Choose namespace:'
+      Text = 'Choose unit scope:'
       TabOrder = 0
       TabStop = False
     end
@@ -197,7 +198,7 @@ object MainForm: TMainForm
     Left = 40
     Top = 528
     object actFindNS: TAction
-      Text = 'Find Namespace(s)'
+      Text = 'Find unit scope name(s)'
       OnExecute = actFindNSExecute
       OnUpdate = actFindNSUpdate
     end

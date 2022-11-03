@@ -120,7 +120,7 @@ procedure TUnitMap.Add(const Entry: TEntry);
 begin
   if Contains(Entry) then
     raise EBug.Create(
-      'Attempt to add duplicate entry in Unit/Namespace map'
+      'Attempt to add duplicate entry in Unit/Unit Scope Name map'
     );
   fMap.Add(Entry);
 end;
@@ -181,7 +181,7 @@ begin
   Idx := IndexOf(Entry);
   if Idx < 0 then
     raise EBug.Create(
-      'Attempt to delete missing entry in Unit/Namespace map'
+      'Attempt to delete missing entry in Unit/Unit Scope Name map'
     );
   fMap.Delete(Idx);
 end;
@@ -330,7 +330,7 @@ begin
   OldIdx := IndexOf(OldEntry);
   if OldIdx < 0 then
     raise EBug.Create(
-      'Attempt to update non-existent entry in Unit/Namespace map'
+      'Attempt to update non-existent entry in Unit/Unit Scope Name map'
     );
   fMap[OldIdx] := NewEntry;
 end;
@@ -364,7 +364,7 @@ begin
   LastSepPos := LastDelimiter(NamespaceSeparator, AFullName);
   if LastSepPos > 0 then
   begin
-    // We have a Namespace
+    // We have a unit scope
     Result := TEntry.Create(
       Copy(AFullName, LastSepPos + 1, Length(AFullName) - LastSepPos),
       Copy(AFullName, 1, LastSepPos - 1)
