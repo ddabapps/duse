@@ -23,13 +23,13 @@ type
       strict private
         var
           fUnitName: string;
-          fNamespace: string;
+          fUnitScope: string;
       public
-        constructor Create(const AUnitName, ANamespace: string);
+        constructor Create(const AUnitName, AUnitScopeName: string);
         class function CreateFromFullUnitName(const AFullName: string): TEntry;
           static;
         function SameUnitName(const AUnitName: string): Boolean;
-        function SameNamespace(const ANamespace: string): Boolean;
+        function SameUnitScopeName(const AUnitScopeName: string): Boolean;
         class function Compare(const A, B: TEntry): Integer; static;
         class function CompareFullUnitNames(const A, B: TEntry): Integer;
           static;
@@ -39,10 +39,10 @@ type
         class operator GreaterThanOrEqual(const A, B: TEntry): Boolean;
         class operator LessThan(const A, B: TEntry): Boolean;
         class operator LessThanOrEqual(const A, B: TEntry): Boolean;
-        class function NamespaceSeparator: Char; static; inline;
+        class function UnitScopeNameSeparator: Char; static; inline;
         function GetFullUnitName: string;
         property UnitName: string read fUnitName;
-        property Namespace: string read fNamespace;
+        property UnitScope: string read fUnitScope;
         property FullUnitName: string read GetFullUnitName;
       end;
   strict private
@@ -71,10 +71,10 @@ type
     procedure SortByFullUnitName;
     function Contains(const Entry: TEntry): Boolean; inline;
     function IsEmpty: Boolean; inline;
-    function FindUnitNamespaces(const UnitName: string): TArray<string>;
-    function FindNamespaceUnits(const Namespace: string): TArray<string>;
-    function FindUniqueNamespaces: TArray<string>;
-    function TryFind(const UnitName, Namespace: string; out Entry: TEntry):
+    function FindUnitScopes(const UnitName: string): TArray<string>;
+    function FindUnitsInScope(const UnitScope: string): TArray<string>;
+    function FindUniqueUnitScopes: TArray<string>;
+    function TryFind(const UnitName, UnitScope: string; out Entry: TEntry):
       Boolean;
     function GetEnumerator: TEnumerator<TEntry>;
     class function Compare(const Left, Right: TUnitMap): Integer;
@@ -199,21 +199,7 @@ begin
   Result := CopyToArray(SelectIndices(FilterFn), MapFn);
 end;
 
-function TUnitMap.FindNamespaceUnits(const Namespace: string): TArray<string>;
-begin
-  Result := Filter(
-    function (Entry: TEntry): Boolean
-    begin
-      Result := Entry.SameNamespace(Namespace);
-    end,
-    function (Entry: TEntry): string
-    begin
-      Result := Entry.UnitName;
-    end
-  );
-end;
-
-function TUnitMap.FindUniqueNamespaces: TArray<string>;
+function TUnitMap.FindUniqueUnitScopes: TArray<string>;
 var
   UniqueList: TList<string>;
   Entry: TEntry;
@@ -229,8 +215,8 @@ begin
   try
     for Entry in fMap do
     begin
-      if not UniqueList.Contains(Entry.Namespace) then
-        UniqueList.Add(Entry.Namespace);
+      if not UniqueList.Contains(Entry.UnitScope) then
+        UniqueList.Add(Entry.UnitScope);
     end;
     Result := UniqueList.ToArray;
   finally
@@ -238,7 +224,7 @@ begin
   end;
 end;
 
-function TUnitMap.FindUnitNamespaces(const UnitName: string): TArray<string>;
+function TUnitMap.FindUnitScopes(const UnitName: string): TArray<string>;
 begin
   Result := Filter(
     function (Entry: TEntry): Boolean
@@ -247,7 +233,21 @@ begin
     end,
     function (Entry: TEntry): string
     begin
-      Result := Entry.Namespace;
+      Result := Entry.UnitScope;
+    end
+  );
+end;
+
+function TUnitMap.FindUnitsInScope(const UnitScope: string): TArray<string>;
+begin
+  Result := Filter(
+    function (Entry: TEntry): Boolean
+    begin
+      Result := Entry.SameUnitScopeName(UnitScope);
+    end,
+    function (Entry: TEntry): string
+    begin
+      Result := Entry.UnitName;
     end
   );
 end;
@@ -309,13 +309,13 @@ begin
   end;
 end;
 
-function TUnitMap.TryFind(const UnitName, Namespace: string;
+function TUnitMap.TryFind(const UnitName, UnitScope: string;
   out Entry: TEntry): Boolean;
 var
   FindItem: TEntry;
   Idx: Integer;
 begin
-  FindItem := TEntry.Create(UnitName, Namespace);
+  FindItem := TEntry.Create(UnitName, UnitScope);
   Idx := IndexOf(FindItem);
   if Idx < 0 then
     Exit(False);
@@ -341,7 +341,7 @@ class function TUnitMap.TEntry.Compare(const A, B: TEntry): Integer;
 begin
   Result := CompareText(A.UnitName, B.UnitName);
   if Result = 0 then
-    Result := CompareText(A.Namespace, B.Namespace);
+    Result := CompareText(A.UnitScope, B.UnitScope);
 end;
 
 class function TUnitMap.TEntry.CompareFullUnitNames(const A,
@@ -350,10 +350,10 @@ begin
   Result := CompareText(A.GetFullUnitName, B.GetFullUnitName);
 end;
 
-constructor TUnitMap.TEntry.Create(const AUnitName, ANamespace: string);
+constructor TUnitMap.TEntry.Create(const AUnitName, AUnitScopeName: string);
 begin
   fUnitName := AUnitName;
-  fNamespace := ANamespace;
+  fUnitScope := AUnitScopeName;
 end;
 
 class function TUnitMap.TEntry.CreateFromFullUnitName(
@@ -361,7 +361,7 @@ class function TUnitMap.TEntry.CreateFromFullUnitName(
 var
   LastSepPos: Integer;
 begin
-  LastSepPos := LastDelimiter(NamespaceSeparator, AFullName);
+  LastSepPos := LastDelimiter(UnitScopeNameSeparator, AFullName);
   if LastSepPos > 0 then
   begin
     // We have a unit scope
@@ -381,8 +381,8 @@ end;
 
 function TUnitMap.TEntry.GetFullUnitName: string;
 begin
-  if fNameSpace <> '' then
-    Result := fNameSpace + NamespaceSeparator + fUnitName
+  if fUnitScope <> '' then
+    Result := fUnitScope + UnitScopeNameSeparator + fUnitName
   else
     Result := fUnitName;
 end;
@@ -408,24 +408,25 @@ begin
   Result := Compare(A, B) <= 0;
 end;
 
-class function TUnitMap.TEntry.NamespaceSeparator: Char;
-begin
-  Result := TPath.ExtensionSeparatorChar;
-end;
-
 class operator TUnitMap.TEntry.NotEqual(const A, B: TEntry): Boolean;
 begin
   Result := Compare(A, B) <> 0;
 end;
 
-function TUnitMap.TEntry.SameNamespace(const ANamespace: string): Boolean;
-begin
-  Result := CompareText(ANamespace, fNameSpace) = 0;
-end;
-
 function TUnitMap.TEntry.SameUnitName(const AUnitName: string): Boolean;
 begin
   Result := CompareText(AUnitName, fUnitName) = 0;
+end;
+
+function TUnitMap.TEntry.SameUnitScopeName(const AUnitScopeName: string):
+  Boolean;
+begin
+  Result := CompareText(AUnitScopeName, fUnitScope) = 0;
+end;
+
+class function TUnitMap.TEntry.UnitScopeNameSeparator: Char;
+begin
+  Result := TPath.ExtensionSeparatorChar;
 end;
 
 { TUnitMaps }

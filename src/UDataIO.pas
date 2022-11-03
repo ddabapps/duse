@@ -64,7 +64,7 @@ type
       fFileName: string;
     procedure CheckHeader;
     procedure ReadMapName;
-    procedure ReadNamespaces;
+    procedure ReadUnitScopes;
   public
     constructor Create(const UnitMap: TUnitMap);
     destructor Destroy; override;
@@ -239,7 +239,7 @@ begin
     fReader.Init(TFile.ReadAllLines(fFileName, FileEncoding));
     CheckHeader;
     ReadMapName;
-    ReadNamespaces;
+    ReadUnitScopes;
   except
     on E: EFileStreamError do
       Exit(False);  // file read error
@@ -272,7 +272,7 @@ begin
   fUnitMap.Name := Name;
 end;
 
-procedure TMapFileReader.ReadNameSpaces;
+procedure TMapFileReader.ReadUnitScopes;
 begin
   while not fReader.AtEnd do
   begin

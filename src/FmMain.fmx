@@ -33,7 +33,7 @@ object MainForm: TMainForm
     Size.PlatformDefault = False
     TabOrder = 2
   end
-  object gbUnitToNS: TGroupBox
+  object gbUnitToScope: TGroupBox
     Position.X = 24.000000000000000000
     Position.Y = 131.000000000000000000
     Size.Width = 481.000000000000000000
@@ -57,15 +57,15 @@ object MainForm: TMainForm
       TabOrder = 3
       TabStop = False
     end
-    object lblFoundNS: TLabel
+    object lblFoundScopes: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 80.000000000000000000
       Text = 'Unit scope name(s):'
       TabOrder = 0
       TabStop = False
     end
-    object btnFindNS: TButton
-      Action = actFindNS
+    object btnFindScopes: TButton
+      Action = actFindScope
       Enabled = True
       ImageIndex = -1
       Position.X = 328.000000000000000000
@@ -87,7 +87,7 @@ object MainForm: TMainForm
       Size.PlatformDefault = False
       TabOrder = 5
     end
-    object lbFoundNS: TListBox
+    object lbFoundScopes: TListBox
       Position.X = 144.000000000000000000
       Position.Y = 80.000000000000000000
       Size.Width = 145.000000000000000000
@@ -102,7 +102,7 @@ object MainForm: TMainForm
       Viewport.Height = 93.000000000000000000
     end
   end
-  object gbUnitInNS: TGroupBox
+  object gbUnitInScope: TGroupBox
     Position.X = 24.000000000000000000
     Position.Y = 345.000000000000000000
     Size.Width = 481.000000000000000000
@@ -110,14 +110,14 @@ object MainForm: TMainForm
     Size.PlatformDefault = False
     Text = 'Lookup units in unit scope'
     TabOrder = 6
-    object lblChooseNS: TLabel
+    object lblChooseScope: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 43.000000000000000000
       Text = 'Choose unit scope:'
       TabOrder = 0
       TabStop = False
     end
-    object lblUnitsInNS: TLabel
+    object lblUnitsInScope: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 88.000000000000000000
       Size.Width = 97.000000000000000000
@@ -127,16 +127,16 @@ object MainForm: TMainForm
       TabOrder = 2
       TabStop = False
     end
-    object cbChooseNS: TComboBox
+    object cbChooseScope: TComboBox
       Position.X = 144.000000000000000000
       Position.Y = 40.000000000000000000
       Size.Width = 193.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      OnChange = cbChooseNSChange
+      OnChange = cbChooseScopeChange
     end
-    object lbUnitsInNS: TListBox
+    object lbUnitsInScope: TListBox
       Position.X = 144.000000000000000000
       Position.Y = 88.000000000000000000
       Size.Width = 193.000000000000000000
@@ -197,10 +197,10 @@ object MainForm: TMainForm
   object alMain: TActionList
     Left = 40
     Top = 528
-    object actFindNS: TAction
+    object actFindScope: TAction
       Text = 'Find unit scope name(s)'
-      OnExecute = actFindNSExecute
-      OnUpdate = actFindNSUpdate
+      OnExecute = actFindScopeExecute
+      OnUpdate = actFindScopeUpdate
     end
     object actCopyFullName: TAction
       Text = 'Copy Full Name'
