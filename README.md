@@ -36,9 +36,13 @@ _Unit2NS_ uses what it calls "mappings" to look up the names of unit scopes that
 
 To do this, start the program and click the _New Mapping_ button. In the resulting dialogue box the first thing to do is to give the mapping a sensible name.
 
-Now you need to provide it with a list of unit scopes and the units that belong to them. There are two ways to do this at present. The first is to enter a fully specified unit name (e.g. `System.SysUtils`) in the edit box above the _Add_ button, then click _Add_. Keep doing this until you've entered all the units you need. Tedious huh?
+Now you need to provide it with a list of unit scopes and the units that belong to them. There are three ways to do this at present:
 
-The second (and much easier) method is to choose the _Read Units From Source Folder_ button. This opens a dialogue box where you choose a directory containing some Pascal source code. Selecting a folder causes every Pascal unit in that folder, and all it's sub-folders, to be read into the mapping. So, if you choose your version of Delphi's `source` folder you'll load every unit Delphi provides into your new mapping. You'll also get quite a few you probably don't want, but that's not really a problem. You can delete any units you don't want by selecting them in the list and clicking the _Delete_ button.
+1. The long winded way is to enter a fully specified unit name (e.g. `System.SysUtils`) in the edit box above the _Add_ button, then click _Add_. Keep doing this until you've entered all the units you need. Tedious huh?
+
+2. A much easier method is to choose the _Read Units From Source Folder_ button. This opens a dialogue box where you choose a directory containing some Pascal source code. Selecting a folder causes every Pascal unit in that folder, and all it's sub-folders, to be read into the mapping. So, if you choose your version of Delphi's `source` folder you'll load every unit Delphi provides into your new mapping. You'll also get quite a few you probably don't want, but that's not really a problem. You can delete any units you don't want by selecting them in the list and clicking the _Delete_ button.
+
+3. If you have one or more versions of Delphi installed that support unit scopes (i.e. Delphi XE2 & later) you can just click the _Read Units From Delphi Installation_ button. This displays a list of all supported installed versions of Delphi in a dialogue box. Choose an  installation and click OK. The units from that version of Delphi's `source` directory will be loaded into your new mapping without you having to locate them.
 
 Once you're done click the _Save And Close_ button to save the mapping.
 
