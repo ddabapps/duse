@@ -27,7 +27,7 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 
 ### Added
 
-* New button on mapping editor & new associated new dialogue box to choose an installed version of Delphi from whose source code directory to read units into a mapping. [issue #8]
+* New button on mapping editor & associated new dialogue box to choose an installed version of Delphi from whose source code directory to read units into a mapping. [issue #8]
 
 ### Changed
 
@@ -51,10 +51,10 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 ## [0.1.1] - 2021-10-01 [HOTFIX]
 
 ### Fixed
-  * Memory leek [issue #1].
+  * Memory leak [issue #1].
 
 ### Added
-  * Debug builds now detect memory leeks.
+  * Debug builds now detect memory leaks.
 
 ### Changed
 * Change compiler & `.dproj` file format to Delphi 11 Alexandria from Delphi 10.4.1 Sydney.
@@ -64,8 +64,8 @@ The version numbering attempts to adhere to the principles of [Semantic Versioni
 
 Initial beta release.
 
-[0.2.1]: https://github.com/delphidabbler/unit2ns/compare/v0.2.0-beta...v0.2.1-beta
-[0.2.0]: https://github.com/delphidabbler/unit2ns/compare/v0.1.2-beta...v0.2.0-beta
-[0.1.2]: https://github.com/delphidabbler/unit2ns/compare/v0.1.1-beta...v0.1.2-beta
-[0.1.1]: https://github.com/delphidabbler/unit2ns/compare/v0.1.0-beta...v0.1.1-beta
-[0.1.0]: https://github.com/delphidabbler/unit2ns/tree/v0.1.0-beta
+[0.2.1]: https://github.com/ddabapps/duse/compare/v0.2.0-beta...v0.2.1-beta
+[0.2.0]: https://github.com/ddabapps/duse/compare/v0.1.2-beta...v0.2.0-beta
+[0.1.2]: https://github.com/ddabapps/duse/compare/v0.1.1-beta...v0.1.2-beta
+[0.1.1]: https://github.com/ddabapps/duse/compare/v0.1.0-beta...v0.1.1-beta
+[0.1.0]: https://github.com/ddabapps/duse/tree/v0.1.0-beta
