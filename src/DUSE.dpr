@@ -4,7 +4,7 @@
   https://github.com/delphidabbler/unit2ns
 }
 
-program Unit2NS;
+program DUSE;
 
 uses
   System.StartUpCopy,
