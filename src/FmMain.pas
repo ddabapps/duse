@@ -1,7 +1,7 @@
 {
   Copyright (c) 2021-2022, Peter Johnson, delphidabbler.com
   MIT License
-  https://github.com/delphidabbler/unit2ns
+  https://github.com/ddabapps/duse
 }
 
 unit FmMain;
@@ -322,7 +322,7 @@ end;
 procedure TMainForm.ExceptionHandler(Sender: TObject; E: Exception);
 resourcestring
   sBug = 'Probable BUG: please report at '
-    + 'https://github.com/delphidabbler/unit2ns';
+    + 'https://github.com/ddabapps/duse/issues';
 begin
   if (E is EUser) or (E is EFileStreamError) then
     TDialogService.MessageDialog(
@@ -400,7 +400,7 @@ var
 begin
   MainCaption := Self.Caption;
   try
-    Self.Caption := 'Unit2NS ... Loading mappings';
+    Self.Caption := 'DUSE ... Loading mappings';
     Application.ProcessMessages;
     TAllMapFilesReader.ReadFiles(fUnitMaps);
   finally

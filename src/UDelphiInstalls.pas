@@ -1,7 +1,7 @@
 {
   Copyright (c) 2022, Peter Johnson, delphidabbler.com
   MIT License
-  https://github.com/delphidabbler/unit2ns
+  https://github.com/ddabapps/duse
 
   Based on the demo code of the article "How to programatically detect installed
   versions of Delphi" - https://delphidabbler.com/articles/27

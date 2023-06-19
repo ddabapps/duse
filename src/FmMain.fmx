@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   BorderStyle = Single
-  Caption = 'Unit2NS - Map Delphi Units To Unit Scope Names'
+  Caption = 'DUSE - Map Delphi Units To Scope Names'
   ClientHeight = 629
   ClientWidth = 529
   Position = ScreenCenter
