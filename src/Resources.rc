@@ -7,12 +7,12 @@
 /*
   Program's icon
 */
-MAINICON ICON "Res/Unit2NS.ico"
+MAINICON ICON "Res/DUSE.ico"
 
 /*
   Manifest file
 */
-1 24 "Res/Unit2NS.manifest"
+1 24 "Res/DUSE.manifest"
 
 /*
   Resource file containing VERSIONINFO resource statement
