@@ -32,10 +32,10 @@ FILETYPE VFT_APP
    VALUE "CompanyName", "DelphiDabbler.com\000"
    VALUE "FileDescription", "Simple tool to display the unit scopes that various Delphi units belong to\000"
    VALUE "FileVersion", "0.2.1\000"
-   VALUE "InternalName", "unit2ns\000"
+   VALUE "InternalName", "DUSE\000"
    VALUE "LegalCopyright", "Copyright (c) 2022, Peter Johnson, delphidabbler.com. Released under the MIT license.\000"
-   VALUE "OriginalFileName", "unit2ns.exe\000"
-   VALUE "ProductName", "unit2ns\000"
+   VALUE "OriginalFileName", "DUSE.exe\000"
+   VALUE "ProductName", "Delphi Unit Scope Expander\000"
    VALUE "ProductVersion", "0.2.1-beta\000"
   }
  }
