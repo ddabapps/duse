@@ -21,10 +21,10 @@ type
   end;
 
   TMapFileBase = class abstract(TDataIOBase)
-  strict private
   strict protected
     const
-      FileHeader = 'Unit2NS unit map file v1';
+      FileVersion = 2;
+      FileHeaderPrefix = 'DUSE unit map file v';
       MapNameIdent = 'NAME';
       MapNameSeparator = '=';
     function FileEncoding: TEncoding;
@@ -44,6 +44,8 @@ type
 
   TMapFileReader = class sealed(TMapFileBase)
   strict private
+    const
+      V1FileHeader = 'Unit2NS unit map file v1';
     type
       TLineReader = class(TObject)
       strict private
@@ -62,6 +64,7 @@ type
       fUnitMap: TUnitMap;
       fReader: TLineReader;
       fFileName: string;
+    function ParseFileVersion(const Header: string): Integer;
     procedure CheckHeader;
     procedure ReadMapName;
     procedure ReadUnitScopes;
@@ -80,7 +83,7 @@ type
   strict private
     class function GetFileNames: TArray<string>;
   public
-    class procedure ReadFiles(const UnitMaps: TUnitMaps);
+    class function ReadFiles(const UnitMaps: TUnitMaps): Boolean;
   end;
 
   TAllMapFilesWriter = class sealed(TDataIOBase)
@@ -104,10 +107,13 @@ type
     procedure ReadFileNames;
   end;
 
+  EMapFileHeader = class(Exception);
+
 implementation
 
 uses
   UConfig,
+  System.Character,
   System.IOUtils,
   Generics.Collections;
 
@@ -160,7 +166,7 @@ var
 begin
   fBuilder.Clear;
   // Header
-  fBuilder.AppendLine(FileHeader);
+  fBuilder.AppendLine(FileHeaderPrefix + FileVersion.ToString);
   fBuilder.AppendLine;
   // Name statement
   fBuilder.AppendLine(MapNameIdent + MapNameSeparator + fUnitMap.Name);
@@ -205,13 +211,10 @@ var
   Line: string;
 begin
   if not fReader.GetNextLine(Line) then
-    raise Exception.CreateFmt(
-      'Error reading unit map file "%0:s": file is empty.', [fFileName]
-    );
-  if not SameText(Line, FileHeader) then
-    raise Exception.CreateFmt(
-      'Error reading unit map file "%0:s": invalid heading.', [fFileName]
-    );
+    raise EMapFileHeader.Create('Empty map file');
+  var Version := ParseFileVersion(Line);
+  if not (Version in [1..FileVersion]) then
+    raise EMapFileHeader.Create('Bad header or file version');
 end;
 
 constructor TMapFileReader.Create(const UnitMap: TUnitMap);
@@ -245,9 +248,26 @@ begin
       Exit(False);  // file read error
     on E: EConvertError do
       Exit(False);  // flaky non-GUID file name
+    on E: EMapFileHeader do
+      Exit(False);  // problems with file header
     else
       raise;
   end;
+end;
+
+function TMapFileReader.ParseFileVersion(const Header: string): Integer;
+begin
+  if string.StartsText(FileHeaderPrefix, Header)
+    and (Header.Length >= FileHeaderPrefix.Length + 1) then
+  begin
+    var Digits := Header.Substring(FileHeaderPrefix.Length);
+    if not TryStrToInt(Digits, Result) then
+      Result := -1;
+  end
+  else if Header = V1FileHeader then
+    Result := 1
+  else
+    Result := -1;
 end;
 
 procedure TMapFileReader.ReadMapName;
@@ -349,7 +369,7 @@ begin
   Result := TDirectory.GetFiles(TConfig.MapFilesRoot);
 end;
 
-class procedure TAllMapFilesReader.ReadFiles(const UnitMaps: TUnitMaps);
+class function TAllMapFilesReader.ReadFiles(const UnitMaps: TUnitMaps): Boolean;
 var
   FileName: string;
   Reader: TMapFileReader;
@@ -357,6 +377,7 @@ var
   Success: Boolean;
 begin
   Success := False;
+  Result := True;
   UnitMaps.Clear;
   for FileName in GetFileNames do
   begin
@@ -369,7 +390,9 @@ begin
         begin
           UnitMaps.AddItem(Map);
           Success := True;
-        end;
+        end
+        else
+          Result := False;
       finally
         Reader.Free;
       end;

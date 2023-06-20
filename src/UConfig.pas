@@ -15,33 +15,38 @@ uses
 type
   TConfig = class(TObject)
   strict private
-    type
-      TPersistentData = class(TObject)
-      strict private
-        class var fData: TStringList;
-        class function ConfigFilePath: string;
-      public
-        class destructor Destroy;
-        class function Data: TStringList;
-        class procedure Save;
-      end;
-
-    class procedure SetCurrentMapping(const Value: string); static;
-    class function GetCurrentMapping: string; static;
+    var
+      fData: TStringList;
+    function GetVersion: Cardinal;
+    procedure SetCurrentVersion;
+    function GetCurrentMapping: string;
+    procedure SetCurrentMapping(const Value: string);
     class function GetAppPath: string;
-    class procedure SetConfigItemStr(const Key, Value: string);
-  public
+    class function ConfigFilePath: string;
+    procedure SetConfigItemStr(const Key, Value: string);
+    function GetConfigItemStr(const Key, Default: string): string;
     const
       MapFilesRelativeRoot = 'config\mappings';
       ConfigFileRelativeName = 'config\config.data';
-      KeyValueSeparator = ':';
+      ConfigFileVersionKey = 'config.version';
+      ConfigFileVersion = 1;
       CurrentMappingKey = 'current.mapping';
-
+      KeyValueSeparator = ':';
+      SupportedKeys: array of string =
+        [ConfigFileVersionKey, CurrentMappingKey];
+  public
+    constructor Create;
+    procedure AfterConstruction; override;
+    procedure BeforeDestruction; override;
+    destructor Destroy; override;
     class function MapFilesRoot: string;
     class function TextFileEncoding: TEncoding; inline;
 
-    class property CurrentMapping: string
+    property Version: Cardinal
+      read GetVersion;
+    property CurrentMapping: string
       read GetCurrentMapping write SetCurrentMapping;
+
   end;
 
 implementation
@@ -51,14 +56,86 @@ uses
 
 { TConfig }
 
+procedure TConfig.AfterConstruction;
+
+  function IsSupportedKey(const AKey: string): Boolean;
+  begin
+    Result := False;
+    for var ValidKey in SupportedKeys do
+      if AKey = ValidKey then
+        Exit(True);
+  end;
+
+begin
+  inherited;
+  if TFile.Exists(ConfigFilePath) then
+  begin
+    // Load config file
+    fData.LoadFromFile(ConfigFilePath, TConfig.TextFileEncoding);
+    if GetVersion <> ConfigFileVersion then
+    begin
+      // Not expected file version: purge any unsupported key config entries
+      for var I := Pred(fData.Count) downto 0 do
+      begin
+        if not IsSupportedKey(fData.Names[I]) then
+          fData.Delete(I);
+      end;
+    end;
+  end
+  else
+    // No config file to load, so we have our own version
+    SetCurrentVersion;
+end;
+
+procedure TConfig.BeforeDestruction;
+begin
+  var DirName := TPath.GetDirectoryName(ConfigFilePath);
+  if not TDirectory.Exists(DirName) then
+    TDirectory.CreateDirectory(DirName);
+  SetCurrentVersion;
+  fData.SaveToFile(ConfigFilePath, TConfig.TextFileEncoding);
+  inherited;
+end;
+
+class function TConfig.ConfigFilePath: string;
+begin
+  Result := TPath.Combine(TConfig.GetAppPath, ConfigFileRelativeName);
+end;
+
+constructor TConfig.Create;
+begin
+  inherited;
+  fData := TStringList.Create;
+  fData.NameValueSeparator := TConfig.KeyValueSeparator;
+end;
+
+destructor TConfig.Destroy;
+begin
+  fData.Free;
+  inherited;
+end;
+
 class function TConfig.GetAppPath: string;
 begin
   Result := TPath.GetDirectoryName(ParamStr(0));
 end;
 
-class function TConfig.GetCurrentMapping: string;
+function TConfig.GetConfigItemStr(const Key, Default: string): string;
 begin
-  Result := TPersistentData.Data.Values[CurrentMappingKey];
+  if fData.IndexOfName(Key) >= 0 then
+    Result := fData.Values[Key]
+  else
+    Result := Default;
+end;
+
+function TConfig.GetCurrentMapping: string;
+begin
+  Result := GetConfigItemStr(CurrentMappingKey, '');
+end;
+
+function TConfig.GetVersion: Cardinal;
+begin
+  Result := GetConfigItemStr(ConfigFileVersionKey, '0').ToInteger;
 end;
 
 class function TConfig.MapFilesRoot: string;
@@ -66,50 +143,24 @@ begin
   Result := TPath.Combine(GetAppPath, MapFilesRelativeRoot);
 end;
 
-class procedure TConfig.SetConfigItemStr(const Key, Value: string);
+procedure TConfig.SetConfigItemStr(const Key, Value: string);
 begin
-  TPersistentData.Data.Values[Key] := Value;
-  TPersistentData.Save;
+  fData.Values[Key] := Value;
 end;
 
-class procedure TConfig.SetCurrentMapping(const Value: string);
+procedure TConfig.SetCurrentMapping(const Value: string);
 begin
   SetConfigItemStr(CurrentMappingKey, Value);
+end;
+
+procedure TConfig.SetCurrentVersion;
+begin
+  SetConfigItemStr(ConfigFileVersionKey, ConfigFileVersion.ToString);
 end;
 
 class function TConfig.TextFileEncoding: TEncoding;
 begin
   Result := TEncoding.UTF8;
-end;
-
-{ TConfig.TPersistentData }
-
-class function TConfig.TPersistentData.ConfigFilePath: string;
-begin
-  Result := TPath.Combine(TConfig.GetAppPath, ConfigFileRelativeName);
-end;
-
-class function TConfig.TPersistentData.Data: TStringList;
-begin
-  if not Assigned(fData) then
-  begin
-    fData := TStringList.Create;
-    fData.NameValueSeparator := TConfig.KeyValueSeparator;
-    if TFile.Exists(ConfigFilePath) then
-      fData.LoadFromFile(ConfigFilePath, TConfig.TextFileEncoding);
-  end;
-  Result := fData;
-end;
-
-class destructor TConfig.TPersistentData.Destroy;
-begin
-  fData.Free;
-end;
-
-class procedure TConfig.TPersistentData.Save;
-begin
-  TDirectory.CreateDirectory(TPath.GetDirectoryName(ConfigFilePath));
-  Data.SaveToFile(ConfigFilePath, TConfig.TextFileEncoding);
 end;
 
 end.
