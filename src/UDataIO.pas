@@ -241,6 +241,7 @@ begin
   try
     fReader.Init(TFile.ReadAllLines(fFileName, FileEncoding));
     CheckHeader;
+
     ReadMapName;
     ReadUnitScopes;
   except
@@ -337,7 +338,8 @@ end;
 procedure TMapFileReader.TLineReader.Init(const Lines: TArray<string>);
 begin
   SetLength(fLines, Length(Lines));
-  TArray.Copy<string>(Lines, fLines, Length(Lines));
+  if Length(Lines) > 0 then
+    TArray.Copy<string>(Lines, fLines, Length(Lines));
   fLineIdx := 0;
   SkipBlankLines;
 end;
