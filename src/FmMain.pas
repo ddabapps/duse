@@ -10,6 +10,7 @@ interface
 
 uses
   UUnitMap,
+  UConfig,
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
@@ -64,6 +65,7 @@ type
       EmptyUniteScopeDisplayText = '<no unit scope>';
     var
       fUnitMaps: TUnitMaps;
+      fConfig: TConfig;
     procedure ExceptionHandler(Sender: TObject; E: Exception);
     procedure LoadMappings;
     procedure PopulateMappingList;
@@ -92,7 +94,6 @@ uses
   FmEditMapping,
   FmNewMapping,
   UClipboard,
-  UConfig,
   UDataIO,
   UExceptions;
 
@@ -343,14 +344,20 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
   Application.OnException := ExceptionHandler;
   fUnitMaps := TUnitMaps.Create;
+  fConfig := TConfig.Create;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  if IsUnitMapSelected then
-    TConfig.CurrentMapping := SelectedUnitMap.Name
-  else
-    TConfig.CurrentMapping := '';
+  if Assigned(fConfig) then
+  begin
+    // TConfig can raise exception in constructor, so it's possible fConfig=nil
+    if IsUnitMapSelected then
+      fConfig.CurrentMapping := SelectedUnitMap.Name
+    else
+      fConfig.CurrentMapping := '';
+    fConfig.Free;
+  end;
   fUnitMaps.Free;
   inherited;
 end;
@@ -363,7 +370,7 @@ begin
   LoadMappings;
   PopulateMappingList;
   // Select last used mapping name
-  LastMapName := TConfig.CurrentMapping;
+  LastMapName := fConfig.CurrentMapping;
   if (LastMapName = '') or not fUnitMaps.NameExists(LastMapName) then
     Exit;
   LastNameIdx := cbMappings.Items.IndexOf(LastMapName);
@@ -402,7 +409,11 @@ begin
   try
     Self.Caption := 'DUSE ... Loading mappings';
     Application.ProcessMessages;
-    TAllMapFilesReader.ReadFiles(fUnitMaps);
+    if not TAllMapFilesReader.ReadFiles(fUnitMaps) then
+      TDialogService.MessageDialog(
+        'Error loading one of more map files.',
+        TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, 0, nil
+      );
   finally
     Self.Caption := MainCaption;
   end;
