@@ -56,7 +56,7 @@ The new mapping will appear in the _Mappings_ drop down at the top of the main w
 
 ### General use
 
-When you need to know what unit scope a unit belongs to, enter the unit's name in the _Name of unit_ edit box in the main window. Click _Find unit scope(s)_ and the names of any unit scopes containing a unit of that name will appear in the list box below. Selecting the unit scope name you want then clicking _Copy Full Name_ puts the fully specified unit name on the clipboard ready for pasting into your code.
+When you need to know what unit scope a unit belongs to, enter the unit's name in the _Name of unit_ edit box in the main window. Click _Find unit scope(s)_ (or press _Ctrl+U_) and the names of any unit scopes containing a unit of that name will appear in the list box below. Selecting the unit scope name you want then clicking _Copy Full Name_ (or pressing _Ctrl+C_) puts the fully specified unit name on the clipboard ready for pasting into your code.
 
 You will sometimes see a unit scope named `<no unit scope>`. That's just a dummy that indicates that the unit exists outside any unit scope. When the `<no unit scope>` is selected clicking _Copy Full Name_ simply puts the unqualified unit name on the clipboard.
 
