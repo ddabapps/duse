@@ -92,18 +92,28 @@ type
   end;
 
   {
-    Reads all *.pas files from a directory and all its sub-directories. Full
-    unit name is file name without extension
+    Reads all files with a given extension from a directory and all its
+    sub-directories. Full unit name is file name without extension
   }
-  TFileSytemReader = class sealed(TObject)
+  TFileSystemReader = class sealed(TObject)
+  public
+    type
+      TFileKind = (Source, Binary);
+    const
+      SourceFile = TFileKind.Source;
+      BinaryFile = TFileKind.Binary;
   strict private
+    const
+      WildCards: array[TFileKind] of string = ('*.pas', '*.dcu');
     var
       fRoot: TFileName;
+      fFileKind: TFileKind;
       fUnitMap: TUnitMap;
       fUnitFiles: TArray<string>;
     function FileNameToUnitName(const FileName: TFileName): string;
   public
-    constructor Create(const Root: TFileName; const UnitMap: TUnitMap);
+    constructor Create(const Root: TFileName; const FileKind: TFileKind;
+      const UnitMap: TUnitMap);
     procedure ReadFileNames;
   end;
 
@@ -423,40 +433,42 @@ begin
   end;
 end;
 
-{ TFileSytemReader }
+{ TFileSystemReader }
 
-constructor TFileSytemReader.Create(const Root: TFileName;
-  const UnitMap: TUnitMap);
+constructor TFileSystemReader.Create(const Root: TFileName;
+  const FileKind: TFileKind; const UnitMap: TUnitMap);
 begin
   inherited Create;
   fRoot := Root;
+  fFileKind := FileKind;
   fUnitMap := UnitMap;
   SetLength(fUnitFiles, 0);
 end;
 
-function TFileSytemReader.FileNameToUnitName(const FileName: TFileName): string;
+function TFileSystemReader.FileNameToUnitName(const FileName: TFileName):
+  string;
 begin
   // Strip path and extension
   Result := TPath.ChangeExtension(
     TPath.GetFileName(FileName),
     ''
   );
-  // TPath.ChangeExtension leaves a training dot at end of file name: strip it
+  // TPath.ChangeExtension leaves a trailing dot at end of file name: strip it
   if (Length(Result) > 0)
     and (Result[Length(Result)] = TPath.ExtensionSeparatorChar) then
     Result := Copy(Result, 1, Length(Result) - 1);
 end;
 
-procedure TFileSytemReader.ReadFileNames;
+procedure TFileSystemReader.ReadFileNames;
 var
   FileNames: TArray<string>;
   FileName: TFileName;
   FullUnitName: string;
   Entry: TUnitMap.TEntry;
 begin
-  // Get .pas files from given root and all sub-directories
+  // Get files with required extension from given root and all sub-directories
   FileNames := TDirectory.GetFiles(
-    fRoot, '*.pas', TSearchOption.soAllDirectories
+    fRoot, WildCards[fFileKind], TSearchOption.soAllDirectories
   );
 
   // Convert file name to unit name and add to unit map, if not already present
