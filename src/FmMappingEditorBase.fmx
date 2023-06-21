@@ -3,8 +3,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
   Top = 0
   BorderStyle = Single
   Caption = 'Form1'
-  ClientHeight = 568
-  ClientWidth = 433
+  ClientHeight = 596
+  ClientWidth = 432
   Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -18,16 +18,17 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Name'
+    TabOrder = 1
     TabStop = False
   end
   object gbEdit: TGroupBox
     Position.X = 16.000000000000000000
     Position.Y = 60.000000000000000000
     Size.Width = 401.000000000000000000
-    Size.Height = 464.000000000000000000
+    Size.Height = 494.000000000000000000
     Size.PlatformDefault = False
     Text = 'Edit Mapping'
-    TabOrder = 1
+    TabOrder = 2
     TabStop = False
     object lbFullUnitNames: TListBox
       Position.X = 16.000000000000000000
@@ -90,8 +91,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     object lblAddHelp: TLabel
       AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 346.000000000000000000
-      Size.Width = 369.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 369.142852783203100000
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       Text = 
@@ -102,8 +103,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     object lblUpdateHelp: TLabel
       AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 384.000000000000000000
-      Size.Width = 369.000000000000000000
+      Position.Y = 414.000000000000000000
+      Size.Width = 369.142852783203100000
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
       Text = 
@@ -114,8 +115,8 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     object lblDeleteHelp: TLabel
       AutoSize = True
       Position.X = 16.000000000000000000
-      Position.Y = 423.000000000000000000
-      Size.Width = 369.000000000000000000
+      Position.Y = 453.000000000000000000
+      Size.Width = 369.142852783203100000
       Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
       Text = 'To delete a unit select it in the list and click Delete.'
@@ -169,6 +170,17 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
       Enabled = True
       ImageIndex = 0
       Position.X = 16.000000000000000000
+      Position.Y = 342.000000000000000000
+      Size.Width = 369.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+    end
+    object btnReadBinaryDir: TButton
+      Action = actReadBinaryDir
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 16.000000000000000000
       Position.Y = 312.000000000000000000
       Size.Width = 369.000000000000000000
       Size.Height = 22.000000000000000000
@@ -181,22 +193,22 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
     Enabled = True
     ImageIndex = -1
     Position.X = 175.000000000000000000
-    Position.Y = 532.000000000000000000
+    Position.Y = 562.000000000000000000
     Size.Width = 145.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 4
   end
   object btnCancel: TButton
     Action = actCancel
     Enabled = True
     ImageIndex = -1
     Position.X = 328.000000000000000000
-    Position.Y = 532.000000000000000000
+    Position.Y = 562.000000000000000000
     Size.Width = 88.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 4
+    TabOrder = 5
   end
   object edMappingName: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -210,6 +222,10 @@ object MappingEditorBaseDlg: TMappingEditorBaseDlg
   object alMain: TActionList
     Left = 16
     Top = 464
+    object actReadBinaryDir: TAction
+      Text = 'Read Units From DCU Folder...'
+      OnExecute = actReadBinaryDirExecute
+    end
     object actReadSourceDir: TAction
       Text = 'Read Units From Source Folder...'
       OnExecute = actReadSourceDirExecute
