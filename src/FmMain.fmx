@@ -3,8 +3,8 @@ object MainForm: TMainForm
   Top = 0
   BorderStyle = Single
   Caption = 'DUSE - Map Delphi Units To Scope Names'
-  ClientHeight = 629
-  ClientWidth = 529
+  ClientHeight = 628
+  ClientWidth = 528
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -74,7 +74,6 @@ object MainForm: TMainForm
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
-      Text = 'Find unit scope(s)'
     end
     object btnCopyFullName: TButton
       Action = actCopyFullName
@@ -198,12 +197,14 @@ object MainForm: TMainForm
     Left = 40
     Top = 528
     object actFindScope: TAction
-      Text = 'Find unit scope name(s)'
+      Text = 'Find Unit Scope(s)'
+      ShortCut = 16469
       OnExecute = actFindScopeExecute
       OnUpdate = actFindScopeUpdate
     end
     object actCopyFullName: TAction
       Text = 'Copy Full Name'
+      ShortCut = 16451
       OnExecute = actCopyFullNameExecute
       OnUpdate = actCopyFullNameUpdate
     end
