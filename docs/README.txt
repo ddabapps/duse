@@ -1,9 +1,10 @@
 DUSE is a portable Windows application for finding which unit scope a given
 Delphi unit belongs to.
 
-The program comes in both 32 and 64 bit versions. There is a different download
-for each version. The 32 bit version executable file is named `DUSE32.exe`
-and the 64 bit version is `DUSE64.exe`.
+The program comes in both 64 and 32 bit versions. There is a different download
+for each version. The 64 bit version executable file is named `DUSE.exe`
+and the 32 bit version is `DUSE32.exe`. Always use the 64 bit version when
+running on 64 bit Windows.
 
 There is no installer for this simple program. Simply copy the `.exe` file to a
 folder on your computer or external drive. You can copy this read-me file to the

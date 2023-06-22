@@ -29,7 +29,7 @@ To create a release build using `Deploy.bat` proceed as follows:
     Deploy 0.3.4-beta
     ```
 
-The script will now build both the Windows 32 and 64 bit release versions of the program. The resulting `.exe` files will be named `DUSE32.exe` and `DUSE64.exe` respectively.
+The script will now build both the Windows 64 and 32 bit release versions of the program. The resulting `.exe` files will be named `DUSE.exe` and `DUSE32.exe` respectively.
 
 Each `.exe` file is then compressed into a separate `.zip` file. A read-me file is included in each `.zip` file. The files are named `duse-32bit-<version>.zip` and `duse-64bit-<version>.zip` where `<version>` is the version number that was passed to `Deploy.bat`. The zip files will be created in the `_build\release` subdirectory.
 

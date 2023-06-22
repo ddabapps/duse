@@ -14,7 +14,7 @@ And the name? **D**elphi **U**nit **S**cope **E**xpander.
 
 _DUSE_ is available as either a 32 bit or 64 bit Windows application. Download the appropriate version from the _Releases_ tab on [GitHub](https://github.com/ddabapps/duse). The program comes in a zip file which you should unzip.
 
-There is no installer for this simple program. Simply copy the `.exe` file to a folder on your computer or on a USB drive. If you have the 32 bit version the executable file is named `DUSE32.exe` while the 64 bit version is `DUSE64.exe`. You can copy this `README.md` file to the same location if you wish.
+The 64 bit program is named `DUSE.exe` while the 32 bit program is named `DUSE32.exe`. There is no installer. You simply need to copy the appropriate `.exe` file to a folder on your computer or on a USB drive. You can copy this `README.md` file to the same location if you wish.
 
 When it is first run, _DUSE_ will write data to a `config` sub-directory of whichever folder you put it in. For that reason you may prefer to place the program in its own folder.
 

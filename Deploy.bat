@@ -70,22 +70,17 @@ echo.
 
 endlocal
 
-:: Rename exe files as 32 and 64 bit
+:: Rename 32 bit exe file
 setlocal
 cd %Win32Dir%
 ren DUSE.exe DUSE32.exe
-endlocal
-
-setlocal
-cd %Win64Dir%
-ren DUSE.exe DUSE64.exe
 endlocal
 
 :: Create zip files
 echo.
 echo Creating zip files
 %ZipRoot%\zip.exe -j -9 %OutFile32% %Win32Dir%\DUSE32.exe
-%ZipRoot%\zip.exe -j -9 %OutFile64% %Win64Dir%\DUSE64.exe
+%ZipRoot%\zip.exe -j -9 %OutFile64% %Win64Dir%\DUSE.exe
 %ZipRoot%\zip.exe -j -9 %OutFile32% %DocsDir%\README.txt
 %ZipRoot%\zip.exe -j -9 %OutFile64% %DocsDir%\README.txt
 
