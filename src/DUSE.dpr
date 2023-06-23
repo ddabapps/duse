@@ -1,10 +1,10 @@
 {
   Copyright (c) 2021, Peter Johnson, delphidabbler.com
   MIT License
-  https://github.com/delphidabbler/unit2ns
+  https://github.com/ddabapps/duse
 }
 
-program Unit2NS;
+program DUSE;
 
 uses
   System.StartUpCopy,

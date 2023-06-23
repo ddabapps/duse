@@ -1,7 +1,7 @@
 {
   Copyright (c) 2021, Peter Johnson, delphidabbler.com
   MIT License
-  https://github.com/delphidabbler/unit2ns
+  https://github.com/ddabapps/duse
 }
 
 unit FmMappingEditorBase;
@@ -9,6 +9,7 @@ unit FmMappingEditorBase;
 interface
 
 uses
+  UDataIO,
   UExceptions,
   UUnitMap,
 
@@ -54,6 +55,8 @@ type
     actClear: TAction;
     btnDelphiInstalls: TButton;
     actDelphiInstalls: TAction;
+    btnReadBinaryDir: TButton;
+    actReadBinaryDir: TAction;
     procedure actAddExecute(Sender: TObject);
     procedure actAddUpdate(Sender: TObject);
     procedure actUpdateExecute(Sender: TObject);
@@ -73,18 +76,21 @@ type
     procedure actSaveCloseUpdate(Sender: TObject);
     procedure actDelphiInstallsUpdate(Sender: TObject);
     procedure actDelphiInstallsExecute(Sender: TObject);
+    procedure actReadBinaryDirExecute(Sender: TObject);
   strict private
     function GetNameEditorText: string;
     function IsNameEditorTextValid: Boolean;
     function IsNameEditorEmpty: Boolean;
     function IsFullUnitNameSelected: Boolean;
-    procedure BuildMapFromFileSystem(const Dir: string; const Map: TUnitMap);
+    procedure BuildMapFromFileSystem(const Dir: string;
+      const FileKind: TFileSystemReader.TFileKind; const Map: TUnitMap);
     procedure UpdateCurrentMap(const NewMap: TUnitMap);
     function GetFileDirectory(out Dir: string): Boolean;
     procedure ClearAndFocusUnitNameEdit;
     procedure UpdateUnitListErrorReport;
     procedure ClearAllEntries;
-    procedure BuildMapFromDir(const Dir: string);
+    procedure BuildMapFromDir(const Dir: string;
+      const FileKind: TFileSystemReader.TFileKind);
   strict protected
     procedure PopulateFullUnitNamesList;
     function GetUnitMap: TUnitMap; virtual; abstract;
@@ -97,7 +103,6 @@ type
 implementation
 
 uses
-  UDataIO,
   UDelphiInstalls,
   FmDelphiInstallSelector,
   FMX.DialogService,
@@ -204,7 +209,7 @@ begin
           [Dlg.SelectedDelphi]
         );
       var SrcDir := TDelphiInstalls.GetSrcPath(Dlg.SelectedDelphi);
-      BuildMapFromDir(SrcDir);
+      BuildMapFromDir(SrcDir, TFileSystemReader.SourceFile);
     end;
   finally
     Dlg.Free;
@@ -216,13 +221,22 @@ begin
   (Sender as TAction).Enabled := TDelphiInstalls.HaveInstalls;
 end;
 
+procedure TMappingEditorBaseDlg.actReadBinaryDirExecute(Sender: TObject);
+var
+  Dir: string;
+begin
+  if not GetFileDirectory(Dir) then
+    Exit;
+  BuildMapFromDir(Dir, TFileSystemReader.BinaryFile);
+end;
+
 procedure TMappingEditorBaseDlg.actReadSourceDirExecute(Sender: TObject);
 var
   Dir: string;
 begin
   if not GetFileDirectory(Dir) then
     Exit;
-  BuildMapFromDir(Dir);
+  BuildMapFromDir(Dir, TFileSystemReader.SourceFile);
 end;
 
 procedure TMappingEditorBaseDlg.actSaveCloseUpdate(Sender: TObject);
@@ -285,11 +299,12 @@ begin
     and IsFullUnitNameSelected;
 end;
 
-procedure TMappingEditorBaseDlg.BuildMapFromDir(const Dir: string);
+procedure TMappingEditorBaseDlg.BuildMapFromDir(const Dir: string;
+  const FileKind: TFileSystemReader.TFileKind);
 begin
   var ReadMap := TUnitMap.Create;
   try
-    BuildMapFromFileSystem(Dir, ReadMap);
+    BuildMapFromFileSystem(Dir, FileKind, ReadMap);
     UpdateCurrentMap(ReadMap);
     PopulateFullUnitNamesList;
   finally
@@ -298,11 +313,11 @@ begin
 end;
 
 procedure TMappingEditorBaseDlg.BuildMapFromFileSystem(const Dir: string;
-  const Map: TUnitMap);
+  const FileKind: TFileSystemReader.TFileKind; const Map: TUnitMap);
 var
-  Reader: TFileSytemReader;
+  Reader: TFileSystemReader;
 begin
-  Reader := TFileSytemReader.Create(Dir, Map);
+  Reader := TFileSystemReader.Create(Dir, FileKind, Map);
   try
     Reader.ReadFileNames;
   finally

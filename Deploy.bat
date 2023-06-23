@@ -1,7 +1,7 @@
-:: Deploy script for Unit2NS
+:: Deploy script for DUSE
 ::
-:: This script compiles release versions of the 64 and 32 bit versions of
-:: Unit2NS and places then into zip files ready for release.
+:: This script compiles release versions of the 64 and 32 bit versions of DUSE
+:: and places then into zip files ready for release.
 ::
 :: This script uses MSBuild and Zip.exe
 
@@ -20,9 +20,9 @@
 
 @echo off
 
-echo -------------------------
-echo Deploying Unit2NS Release
-echo -------------------------
+echo ----------------------
+echo Deploying DUSE Release
+echo ----------------------
 
 :: Check for required parameter
 if "%1"=="" goto paramerror
@@ -37,8 +37,8 @@ set BuildExeRoot=%BuildRoot%\exe
 set Win32Dir=%BuildExeRoot%\Win32\Release
 set Win64Dir=%BuildExeRoot%\Win64\Release
 set ReleaseDir=%BuildRoot%\release
-set OutFile32=%ReleaseDir%\unit2ns-32bit-%Version%.zip
-set OutFile64=%ReleaseDir%\unit2ns-64bit-%Version%.zip
+set OutFile32=%ReleaseDir%\duse-32bit-%Version%.zip
+set OutFile64=%ReleaseDir%\duse-64bit-%Version%.zip
 set DocsDir=docs
 set SrcDir=src
 
@@ -59,33 +59,28 @@ cd %SrcDir%
 echo.
 echo Building 32 bit version
 echo.
-msbuild Unit2NS.dproj /p:config=Release /p:platform=Win32
+msbuild DUSE.dproj /p:config=Release /p:platform=Win32
 echo.
 
 echo.
 echo Building 64 bit version
 echo.
-msbuild Unit2NS.dproj /p:config=Release /p:platform=Win64
+msbuild DUSE.dproj /p:config=Release /p:platform=Win64
 echo.
 
 endlocal
 
-:: Rename exe files as 32 and 64 bit
+:: Rename 32 bit exe file
 setlocal
 cd %Win32Dir%
-ren Unit2NS.exe Unit2NS32.exe
-endlocal
-
-setlocal
-cd %Win64Dir%
-ren Unit2NS.exe Unit2NS64.exe
+ren DUSE.exe DUSE32.exe
 endlocal
 
 :: Create zip files
 echo.
 echo Creating zip files
-%ZipRoot%\zip.exe -j -9 %OutFile32% %Win32Dir%\Unit2NS32.exe
-%ZipRoot%\zip.exe -j -9 %OutFile64% %Win64Dir%\Unit2NS64.exe
+%ZipRoot%\zip.exe -j -9 %OutFile32% %Win32Dir%\DUSE32.exe
+%ZipRoot%\zip.exe -j -9 %OutFile64% %Win64Dir%\DUSE.exe
 %ZipRoot%\zip.exe -j -9 %OutFile32% %DocsDir%\README.txt
 %ZipRoot%\zip.exe -j -9 %OutFile64% %DocsDir%\README.txt
 

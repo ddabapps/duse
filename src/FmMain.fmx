@@ -2,9 +2,9 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   BorderStyle = Single
-  Caption = 'Unit2NS - Map Delphi Units To Namespaces'
-  ClientHeight = 629
-  ClientWidth = 529
+  Caption = 'DUSE - Map Delphi Units To Scope Names'
+  ClientHeight = 628
+  ClientWidth = 528
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -33,13 +33,13 @@ object MainForm: TMainForm
     Size.PlatformDefault = False
     TabOrder = 2
   end
-  object gbUnitToNS: TGroupBox
+  object gbUnitToScope: TGroupBox
     Position.X = 24.000000000000000000
     Position.Y = 131.000000000000000000
     Size.Width = 481.000000000000000000
     Size.Height = 193.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Lookup namespaces for unit'
+    Text = 'Lookup unit scopes for unit'
     TabOrder = 5
     object edUnitToFind: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -57,15 +57,15 @@ object MainForm: TMainForm
       TabOrder = 3
       TabStop = False
     end
-    object lblFoundNS: TLabel
+    object lblFoundScopes: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 80.000000000000000000
-      Text = 'Namespace(s):'
+      Text = 'Unit scope name(s):'
       TabOrder = 0
       TabStop = False
     end
-    object btnFindNS: TButton
-      Action = actFindNS
+    object btnFindScopes: TButton
+      Action = actFindScope
       Enabled = True
       ImageIndex = -1
       Position.X = 328.000000000000000000
@@ -86,7 +86,7 @@ object MainForm: TMainForm
       Size.PlatformDefault = False
       TabOrder = 5
     end
-    object lbFoundNS: TListBox
+    object lbFoundScopes: TListBox
       Position.X = 144.000000000000000000
       Position.Y = 80.000000000000000000
       Size.Width = 145.000000000000000000
@@ -101,22 +101,22 @@ object MainForm: TMainForm
       Viewport.Height = 93.000000000000000000
     end
   end
-  object gbUnitInNS: TGroupBox
+  object gbUnitInScope: TGroupBox
     Position.X = 24.000000000000000000
     Position.Y = 345.000000000000000000
     Size.Width = 481.000000000000000000
     Size.Height = 233.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Lookup units in namespace'
+    Text = 'Lookup units in unit scope'
     TabOrder = 6
-    object lblChooseNS: TLabel
+    object lblChooseScope: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 43.000000000000000000
-      Text = 'Choose namespace:'
+      Text = 'Choose unit scope:'
       TabOrder = 0
       TabStop = False
     end
-    object lblUnitsInNS: TLabel
+    object lblUnitsInScope: TLabel
       Position.X = 24.000000000000000000
       Position.Y = 88.000000000000000000
       Size.Width = 97.000000000000000000
@@ -126,16 +126,16 @@ object MainForm: TMainForm
       TabOrder = 2
       TabStop = False
     end
-    object cbChooseNS: TComboBox
+    object cbChooseScope: TComboBox
       Position.X = 144.000000000000000000
       Position.Y = 40.000000000000000000
       Size.Width = 193.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      OnChange = cbChooseNSChange
+      OnChange = cbChooseScopeChange
     end
-    object lbUnitsInNS: TListBox
+    object lbUnitsInScope: TListBox
       Position.X = 144.000000000000000000
       Position.Y = 88.000000000000000000
       Size.Width = 193.000000000000000000
@@ -196,13 +196,15 @@ object MainForm: TMainForm
   object alMain: TActionList
     Left = 40
     Top = 528
-    object actFindNS: TAction
-      Text = 'Find Namespace(s)'
-      OnExecute = actFindNSExecute
-      OnUpdate = actFindNSUpdate
+    object actFindScope: TAction
+      Text = 'Find Unit Scope(s)'
+      ShortCut = 16469
+      OnExecute = actFindScopeExecute
+      OnUpdate = actFindScopeUpdate
     end
     object actCopyFullName: TAction
       Text = 'Copy Full Name'
+      ShortCut = 16451
       OnExecute = actCopyFullNameExecute
       OnUpdate = actCopyFullNameUpdate
     end
