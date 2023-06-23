@@ -2,6 +2,16 @@
 
 A little tool for Delphi programmers to find the unit scope(s) that a unit belongs to.
 
+## Contents
+
+* [Introduction](#introduction)
+* [Installation, Updating & Removal](#installation-updating--removal)
+* [Mini-help](#mini-help)
+* [License](#license)
+* [Changelog](#changelog)
+* [Contributing](#contributing)
+* [Bugs and Feature Requests](#bugs-and-feature-requests)
+
 ## Introduction
 
 Since the introduction of unit scopes to Delphi I've been struggling to remember the names of the unit scopes that some units belong to. OK, sometimes the code editor will pop up a list of units in a unit scope, but what I want is to type in a unit name and be told what unit scopes(s) the unit may belong to. Hence _DUSE_.
@@ -10,11 +20,13 @@ And the name? **D**elphi **U**nit **S**cope **E**xpander.
 
 ## Installation, Updating & Removal
 
-### Installing
+### Installation
 
-_DUSE_ is available as either a 32 bit or 64 bit Windows application. Download the appropriate version from the _Releases_ tab on [GitHub](https://github.com/ddabapps/duse). The program comes in a zip file which you should unzip.
+_DUSE_ is available as both 64 bit and 32 bit Windows applications. You should _always_ use the 64 bit version if you're running 64 bit Windows and _only_ use the 32 bit version if you're running 32 bit Windows.
 
-There is no installer for this simple program. Simply copy the `.exe` file to a folder on your computer or on a USB drive. If you have the 32 bit version the executable file is named `DUSE32.exe` while the 64 bit version is `DUSE64.exe`. You can copy this `README.md` file to the same location if you wish.
+The 64 and 32 bit versions are distributed in separate zip files named `duse-64bit-<version>.zip` and `duse-32bit-<version>.zip` respectively, where `<version>` is the release version number. Download the appropriate version from the _Releases_ tab on [GitHub](https://github.com/ddabapps/duse) and unzip the file.
+
+The 64 bit program is named `DUSE.exe` while the 32 bit program is named `DUSE32.exe`. There is no installer. You simply need to copy the appropriate `.exe` file to a folder on your computer or on a USB drive. You can copy this `README.md` file to the same location if you wish.
 
 When it is first run, _DUSE_ will write data to a `config` sub-directory of whichever folder you put it in. For that reason you may prefer to place the program in its own folder.
 
@@ -22,11 +34,11 @@ When it is first run, _DUSE_ will write data to a `config` sub-directory of whic
 
 ### Updating
 
-To update the program simply download a newer version and overwrite the `.exe` file in whichever location you installed it. Be careful not to delete the `config` subdirectory otherwise you will loose your data.
+To update the program simply download a newer version and overwrite the appropriate `.exe` file in whichever location you installed it. Be careful not to delete the `config` subdirectory otherwise you will loose your data.
 
-> 🗒️ If you are updating from v0.2.1-beta or earlier the executable file name will be either `Unit2NS32.exe` or `Unit2NS64.exe`. Delete that file and copy in either `DUSE32.exe` or `DUSE64.exe` in its place. You still need to preserve the `config` sub-directory.
+> 🗒️ If you are updating from v0.2.1-beta or earlier then the existing file name will be either `Unit2NS64.exe` (64 bit) or `Unit2NS32.exe` (32 bit). Delete that file and copy in either `DUSE.exe` or `DUSE32.exe` in its place. It remains important to preserve the `config` sub-directory and its content.
 
-### Uninstalling
+### Removing
 
 To uninstall the program simply delete the `.exe` file from wherever you installed it. If you have no further use for the program's data then delete the `config` sub-directory and all its contents too.
 
@@ -68,7 +80,7 @@ You can't rename a mapping.
 
 ## License
 
-_DUSE_ is copyright © 2021-2022, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/ddabapps/duse/blob/master/LICENSE) file included in the root of the GitHub repository for details.
+_DUSE_ is copyright © 2021-2023, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/ddabapps/duse/blob/master/LICENSE) file included in the root of the GitHub repository for details.
 
 ## Changelog
 
