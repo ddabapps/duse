@@ -32,20 +32,63 @@ type
     const
       // List of all versions of Delphi that support unit scope names, along
       // with the registry key where info about the installation is stored.
-      AllDelphis: array[0..12] of TInstallInfo = (
-        (Name: 'Delphi XE2'; RegKey: '\Software\Embarcadero\BDS\9.0'),
-        (Name: 'Delphi XE3'; RegKey: '\Software\Embarcadero\BDS\10.0'),
-        (Name: 'Delphi XE4'; RegKey: '\Software\Embarcadero\BDS\11.0'),
-        (Name: 'Delphi XE5'; RegKey: '\Software\Embarcadero\BDS\12.0'),
-        (Name: 'Delphi XE6'; RegKey: '\Software\Embarcadero\BDS\14.0'),
-        (Name: 'Delphi XE7'; RegKey: '\Software\Embarcadero\BDS\15.0'),
-        (Name: 'Delphi XE8'; RegKey: '\Software\Embarcadero\BDS\16.0'),
-        (Name: 'Delphi 10 Seattle'; RegKey: '\Software\Embarcadero\BDS\17.0'),
-        (Name: 'Delphi 10.1 Berlin'; RegKey: '\Software\Embarcadero\BDS\18.0'),
-        (Name: 'Delphi 10.2 Tokyo'; RegKey: '\Software\Embarcadero\BDS\19.0'),
-        (Name: 'Delphi 10.3 Rio'; RegKey: '\Software\Embarcadero\BDS\20.0'),
-        (Name: 'Delphi 10.4 Sydney'; RegKey: '\Software\Embarcadero\BDS\21.0'),
-        (Name: 'Delphi 11 Alexandria'; RegKey: '\Software\Embarcadero\BDS\22.0')
+      AllDelphis: array[1..14] of TInstallInfo = (
+        (
+          Name: 'Delphi XE2';
+          RegKey: '\Software\Embarcadero\BDS\9.0'
+        ),
+        (
+          Name: 'Delphi XE3';
+          RegKey: '\Software\Embarcadero\BDS\10.0'
+        ),
+        (
+          Name: 'Delphi XE4';
+          RegKey: '\Software\Embarcadero\BDS\11.0'
+        ),
+        (
+          Name: 'Delphi XE5';
+          RegKey: '\Software\Embarcadero\BDS\12.0'
+        ),
+        (
+          Name: 'Delphi XE6';
+          RegKey: '\Software\Embarcadero\BDS\14.0'
+        ),
+        (
+          Name: 'Delphi XE7';
+          RegKey: '\Software\Embarcadero\BDS\15.0'
+        ),
+        (
+          Name: 'Delphi XE8';
+          RegKey: '\Software\Embarcadero\BDS\16.0'
+        ),
+        (
+          Name: 'Delphi 10 Seattle';
+          RegKey: '\Software\Embarcadero\BDS\17.0'
+        ),
+        (
+          Name: 'Delphi 10.1 Berlin';
+          RegKey: '\Software\Embarcadero\BDS\18.0'
+        ),
+        (
+          Name: 'Delphi 10.2 Tokyo';
+          RegKey: '\Software\Embarcadero\BDS\19.0'
+        ),
+        (
+          Name: 'Delphi 10.3 Rio';
+          RegKey: '\Software\Embarcadero\BDS\20.0'
+        ),
+        (
+          Name: 'Delphi 10.4 Sydney';
+          RegKey: '\Software\Embarcadero\BDS\21.0'
+        ),
+        (
+          Name: 'Delphi 11 Alexandria';
+          RegKey: '\Software\Embarcadero\BDS\22.0'
+        ),
+        (
+          Name: 'Delphi 12 Athens';
+          RegKey: '\Software\Embarcadero\BDS\23.0'
+        )
       );
     type
       // Record containing name of a Delphi version with the path to its source
