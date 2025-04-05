@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2021-2023, Peter Johnson, delphidabbler.com
+  Copyright (c) 2021-2025, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/ddabapps/duse
 */
@@ -19,8 +19,8 @@ MAINICON ICON "Res/DUSE.ico"
   Produced by Version Information Editor from DelphiDabbler
 */                                                                                                                      \
 1 VERSIONINFO
-FILEVERSION 0, 3, 0, 0
-PRODUCTVERSION 0, 3, 0, 0
+FILEVERSION 0, 3, 1, 0
+PRODUCTVERSION 0, 3, 1, 0
 FILEFLAGSMASK 0x00
 FILEOS VOS__WINDOWS32
 FILETYPE VFT_APP
@@ -31,12 +31,12 @@ FILETYPE VFT_APP
   {
    VALUE "CompanyName", "DelphiDabbler.com\000"
    VALUE "FileDescription", "Simple tool to display the unit scopes that various Delphi units belong to\000"
-   VALUE "FileVersion", "0.3.0\000"
+   VALUE "FileVersion", "0.3.1\000"
    VALUE "InternalName", "DUSE\000"
-   VALUE "LegalCopyright", "Copyright (c) 2022-2023, Peter Johnson, delphidabbler.com. Released under the MIT license.\000"
+   VALUE "LegalCopyright", "Copyright (c) 2022-2025, Peter Johnson, delphidabbler.com. Released under the MIT license.\000"
    VALUE "OriginalFileName", "DUSE.exe\000"
    VALUE "ProductName", "Delphi Unit Scope Expander\000"
-   VALUE "ProductVersion", "0.3.0\000"
+   VALUE "ProductVersion", "0.3.1\000"
   }
  }
  BLOCK "VarFileInfo"
