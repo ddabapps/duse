@@ -80,7 +80,7 @@ You can't rename a mapping.
 
 ## License
 
-_DUSE_ is copyright © 2021-2023, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/ddabapps/duse/blob/master/LICENSE) file included in the root of the GitHub repository for details.
+_DUSE_ is copyright © 2021-2025, Peter Johnson (delphidabbler.com) and is released under the MIT license. See the [`LICENSE`](https://github.com/ddabapps/duse/blob/master/LICENSE) file included in the root of the GitHub repository for details.
 
 ## Changelog
 
