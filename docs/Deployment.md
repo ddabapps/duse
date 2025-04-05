@@ -1,12 +1,12 @@
 # Building & Deploying Releases
 
-_DUSE_ is written in Delphi Pascal and was developed using Delphi 11 Alexandria.
+_DUSE_ is written in Delphi Pascal and was developed using Delphi 12 Athens.
 
 While debug builds and draft releases can be built entirely from within the Delphi IDE, releases for deployment are created using the `Deploy.bat` script that can be found in the Git repository root. The script uses _MSBuild_ and requires _InfoZip_'s version of [`zip.exe`](https://delphidabbler.com/extras/info-zip) to be installed.
 
 To create a release build using `Deploy.bat` proceed as follows:
 
-1. Start the Delphi Alexandria RAD Studio Command Prompt from the Windows start menu.
+1. Start the Delphi 12 Athens RAD Studio Command Prompt from the Windows start menu.
 
 2. Create an environment variable named `ZipRoot` whose value is the fully specified name of the directory containing `zip.exe`, without a trailing backslash. E.g.:
 
