@@ -31,6 +31,6 @@ The program is open source and is maintained on GitHub at
 Brief help on using DUSE can be found at
 <https://github.com/ddabapps/duse/blob/master/README.md>
 
-DUSE is copyright (c) 2021-2023 Peter Johnson,
+DUSE is copyright (c) 2021-2025 Peter Johnson,
 <https://gravatar.com/delphidabbler>, and is released under the MIT License. See
 <https://github.com/ddabapps/duse/blob/develop/LICENSE>.

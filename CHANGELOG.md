@@ -4,6 +4,18 @@ This is the change log for DelphiDabbler _DUSE_.
 
 All notable changes to this project are documented in this file. Releases are listed in reverse version number order. The file format adheres closely to the recommendations of the [keep a changelog](https://keepachangelog.com/) project.
 
+## [0.3.1] - 2025-04-05
+
+### Fixed
+
+* Added missing support for detecting and reading units names from Delphi 12 Athens installations [issue #32].
+
+### Changed
+
+* Change compiler & `.dproj` file format to Delphi 12 Athens from Delphi 11 Alexandria.
+* Updated documentation re change of compiler
+* Updated copyright statements to include the year 2025.
+
 ## [0.3.0] - 2023-06-23
 
 > Program renamed from _Unit2NS_ to _DUSE_ at this release.
@@ -108,6 +120,7 @@ Released as _Unit2NS_.
 
 **Initial beta release.**
 
+[0.3.1]: https://github.com/ddabapps/duse/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/ddabapps/duse/compare/v0.2.1-beta...v0.3.0
 [0.2.1]: https://github.com/ddabapps/duse/compare/v0.2.0-beta...v0.2.1-beta
 [0.2.0]: https://github.com/ddabapps/duse/compare/v0.1.2-beta...v0.2.0-beta

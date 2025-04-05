@@ -1,5 +1,5 @@
 {
-  Copyright (c) 2022-2023, Peter Johnson, delphidabbler.com
+  Copyright (c) 2022-2025, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/ddabapps/duse
 }
