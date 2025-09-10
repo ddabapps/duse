@@ -60,7 +60,7 @@ Now you need to provide it with a list of unit scopes and the units that belong 
 
 3. Closely related to the previous option is to choose the _Read Units From DCU Folder_ button. This allows you to choose a directory containing `.dcu` files instead of `.pas` files.
 
-4. If you have one or more versions of Delphi installed that support unit scopes (i.e. Delphi XE2 & later) you can just click the _Read Units From Delphi Installation_ button. This displays a list of all supported installed versions of Delphi in a dialogue box. Choose an  installation and click OK. The units from that version of Delphi's `source` directory will be loaded into your new mapping without you having to locate them.
+4. If you have one or more versions of Delphi installed that support unit scopes (presently Delphi XE2 to Delphi 13 Florence) you can just click the _Read Units From Delphi Installation_ button. This displays a list of all supported installed versions of Delphi in a dialogue box. Choose an  installation and click OK. The units from that version of Delphi's `source` directory will be loaded into your new mapping without you having to locate them.
 
 Once you're done click the _Save And Close_ button to save the mapping.
 
