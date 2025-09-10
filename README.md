@@ -98,7 +98,7 @@ Please make a fork from the `develop` branch (**not** `master`) and create a new
 
 ### Compiling From Source
 
-The latest version of _DUSE_ is written in Delphi Object Pascal and developed using Delphi 12 Athens. The program can be compiled from within the IDE.
+The latest version of _DUSE_ is written in Delphi Object Pascal and developed using Delphi 13 Florence. The program can be compiled from within the IDE.
 
 ## Bugs and Feature Requests
 
