@@ -4,6 +4,17 @@ This is the change log for DelphiDabbler _DUSE_.
 
 All notable changes to this project are documented in this file. Releases are listed in reverse version number order. The file format adheres closely to the recommendations of the [keep a changelog](https://keepachangelog.com/) project.
 
+## [0.3.2] - 2025-09-11
+
+### Added 
+
+* Added support for detecting and reading units from Delphi 13 Florence installations [issue #33].
+
+### Changed
+
+* Changed compiler & `.dproj` file format to Delphi 13 Florence from Delphi 12 Athens.
+* Updated documentation re change of compiler to, and detection of Delphi 13 Florence.
+
 ## [0.3.1] - 2025-04-05
 
 ### Fixed
@@ -120,6 +131,7 @@ Released as _Unit2NS_.
 
 **Initial beta release.**
 
+[0.3.2]: https://github.com/ddabapps/duse/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/ddabapps/duse/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/ddabapps/duse/compare/v0.2.1-beta...v0.3.0
 [0.2.1]: https://github.com/ddabapps/duse/compare/v0.2.0-beta...v0.2.1-beta
