@@ -32,7 +32,7 @@ type
     const
       // List of all versions of Delphi that support unit scope names, along
       // with the registry key where info about the installation is stored.
-      AllDelphis: array[1..14] of TInstallInfo = (
+      AllDelphis: array[1..15] of TInstallInfo = (
         (
           Name: 'Delphi XE2';
           RegKey: '\Software\Embarcadero\BDS\9.0'
@@ -88,6 +88,10 @@ type
         (
           Name: 'Delphi 12 Athens';
           RegKey: '\Software\Embarcadero\BDS\23.0'
+        ),
+        (
+          Name: 'Delphi 13 Florence';
+          RegKey: '\Software\Embarcadero\BDS\37.0'
         )
       );
     type
